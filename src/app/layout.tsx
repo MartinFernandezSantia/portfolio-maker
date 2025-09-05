@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,10 +24,12 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased`}
       >
-        <TooltipProvider>
-          <Toaster />
-          {children}
-        </TooltipProvider>
+        <ThemeProvider defaultTheme="dark" attribute="class">
+          <TooltipProvider>
+            <Toaster />
+            {children}
+          </TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
