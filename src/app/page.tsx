@@ -6,6 +6,7 @@ import Education from "@/components/main/education";
 import Projects from "@/components/main/projects";
 import Contact  from "@/components/main/contact";
 import Hero from "@/components/main/hero";
+import Footer from "@/components/layout/footer";
 
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <Projects />
         <Contact />
       </main>
+      <Footer />
     </div>
   );
 }
