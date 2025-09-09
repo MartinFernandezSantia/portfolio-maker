@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { HeroButton } from "@/components/ui/button-variants";
 import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
-///import developerAvatar from "@/assets/developer-avatar.jpg";
 import placeholder from "@/public/placeholder.svg";
 import Image from "next/image";
 
@@ -14,32 +13,6 @@ const Hero = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-secondary opacity-50" />
-      
-      {/* Animated background dots */}
-      <div className="absolute inset-0">
-        {Array.from({ length: 50 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-primary rounded-full opacity-20"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-            }}
-            animate={{
-              y: [0, -10, 0],
-              opacity: [0.2, 0.5, 0.2],
-            }}
-            transition={{
-              duration: 3 + Math.random() * 2,
-              repeat: Infinity,
-              delay: Math.random() * 2,
-            }}
-          />
-        ))}
-      </div>
-
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
           {/* Avatar */}
@@ -74,7 +47,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
           >
-            Full Stack Developer crafting beautiful, functional web experiences 
+            Full Stack Developer crafting beautiful, functional web experiences
             with modern technologies and clean code.
           </motion.p>
 
