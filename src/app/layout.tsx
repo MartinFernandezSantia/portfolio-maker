@@ -24,7 +24,7 @@ export default function RootLayout({
       <body
         className={`${inter.className} antialiased`}
       >
-        <ThemeProvider defaultTheme="dark" attribute="class">
+        <ThemeProvider defaultTheme="system" attribute="class">
           <TooltipProvider>
             <Toaster />
             {children}
