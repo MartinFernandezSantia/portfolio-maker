@@ -183,15 +183,7 @@ const Contact = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              <Card className="p-6 bg-gradient-primary text-primary-foreground">
-                <h4 className="font-semibold mb-2">Ready to Start a Project?</h4>
-                <p className="text-primary-foreground/80 mb-4">
-                  Let's discuss your ideas and turn them into reality.
-                </p>
-                <HeroButton variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                  Schedule a Call
-                </HeroButton>
-              </Card>
+
             </motion.div>
           </motion.div>
         </div>
