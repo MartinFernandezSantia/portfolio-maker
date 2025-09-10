@@ -31,14 +31,9 @@ export const Navigation = () => {
         { name: "Contact", href: "#contact" },
     ];
 
-    const scrollToSection = (href: string) => {
-        if (href === "#") {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-            document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-        }
+    const closeMobileMenu = () => {
         setIsMobileMenuOpen(false);
-    };
+    }
 
     return (
         <motion.nav
@@ -52,10 +47,10 @@ export const Navigation = () => {
         >
             <div className="container mx-auto px-6">
                 <div className="flex items-center justify-between h-16">
-                    <Logo scrollToSection={scrollToSection} />
+                    <Logo onClick={closeMobileMenu} />
 
                     <div className="hidden md:flex items-center space-x-8">
-                        <DesktopNav scrollToSection={scrollToSection} navItems={navItems} />
+                        <DesktopNav onClick={closeMobileMenu} navItems={navItems} />
                     </div>
 
                     <MobileMenuButton
@@ -66,7 +61,7 @@ export const Navigation = () => {
 
                 <MobileNav
                     isMobileMenuOpen={isMobileMenuOpen}
-                    scrollToSection={scrollToSection}
+                    onClick={closeMobileMenu}
                     navItems={navItems}
                 />
             </div>

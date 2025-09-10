@@ -1,29 +1,31 @@
 import React from 'react'
-import { motion } from "framer-motion";
 import { HeroButton } from './ui/button-variants';
 import { NavItem } from '@/lib/types';
+import { MotionLink } from './motion-link';
+import { scrollToSection } from '@/lib/utils';
 
 type DesktopNavProps = {
-    scrollToSection: (href: string) => void;
+    onClick: () => void;
     navItems: NavItem[];
 }
 
-export default function DesktopNav({ scrollToSection, navItems }: DesktopNavProps) {
+export default function DesktopNav({ onClick, navItems }: DesktopNavProps) {
     return (
         <>
             {navItems.map((item) => (
-                <motion.a
+                <MotionLink
                     key={item.name}
                     href={item.href}
                     onClick={(e) => {
                         e.preventDefault();
                         scrollToSection(item.href);
+                        onClick();
                     }}
                     className="text-foreground hover:text-primary transition-smooth relative group"
                     whileHover={{ y: -2 }}
                 >
                     {item.name}
-                </motion.a>
+                </MotionLink>
             ))}
             <HeroButton variant="hero" size="sm">
                 Hire Me

@@ -1,115 +1,42 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { HeroButton } from "@/components/ui/button-variants";
-import { ChevronDown, Github, Linkedin, Mail } from "lucide-react";
-import placeholder from "@/public/placeholder.svg";
-import Image from "next/image";
+import H1 from "../h1";
+import Subtitle from "../subtitle";
+import Avatar from "../avatar";
+import CTA from "../cta";
+import Socials from "../socials";
+import ScrollDown from "../scroll-down";
+import { scrollToSection } from "@/lib/utils";
 
 const Hero = () => {
   const scrollToAbout = () => {
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
+    scrollToSection("#about");
   };
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center">
-          {/* Avatar */}
-          <motion.div
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="mb-8"
-          >
-            <Image
-              src={placeholder}
-              alt="Alex Johnson"
-              className="w-32 h-32 rounded-full mx-auto glow border-4 border-primary"
-            />
-          </motion.div>
 
-          {/* Main heading */}
-          <motion.h1
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6"
-          >
-            Hi, I'm{" "}
+          <Avatar />
+
+          <H1>
+            Hi, I&apos;m{" "}
             <span className="gradient-text">Alex Johnson</span>
-          </motion.h1>
+          </H1>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto"
-          >
+          <Subtitle>
             Full Stack Developer crafting beautiful, functional web experiences
             with modern technologies and clean code.
-          </motion.p>
+          </Subtitle>
 
-          {/* CTA Buttons */}
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
-          >
-            <HeroButton variant="hero" size="lg" className="group">
-              View My Work
-              <motion.span
-                className="ml-2"
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </HeroButton>
-            <HeroButton variant="outline" size="lg">
-              Get In Touch
-            </HeroButton>
-          </motion.div>
+          <CTA />
 
-          {/* Social Links */}
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="flex justify-center gap-6 mb-16"
-          >
-            {[
-              { Icon: Github, href: "#", label: "GitHub" },
-              { Icon: Linkedin, href: "#", label: "LinkedIn" },
-              { Icon: Mail, href: "#", label: "Email" },
-            ].map(({ Icon, href, label }) => (
-              <motion.a
-                key={label}
-                href={href}
-                className="p-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth glow"
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                aria-label={label}
-              >
-                <Icon className="w-5 h-5" />
-              </motion.a>
-            ))}
-          </motion.div>
+          <Socials />
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.button
-        onClick={scrollToAbout}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-primary"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 1.5, repeat: Infinity }}
-        aria-label="Scroll to about section"
-      >
-        <ChevronDown className="w-6 h-6" />
-      </motion.button>
+      <ScrollDown scrollToNextSection={scrollToAbout} />
     </section>
   );
 };

@@ -2,14 +2,16 @@ import React from 'react'
 import { motion } from "framer-motion";
 import { HeroButton } from './ui/button-variants';
 import { NavItem } from '@/lib/types';
+import { MotionLink } from './motion-link';
+import { scrollToSection } from '@/lib/utils';
 
 type MobileNavProps = {
     isMobileMenuOpen: boolean;
-    scrollToSection: (href: string) => void;
+    onClick: () => void;
     navItems: NavItem[];
 }
 
-export default function MobileNav({ isMobileMenuOpen, scrollToSection, navItems }: MobileNavProps) {
+export default function MobileNav({ isMobileMenuOpen, onClick, navItems }: MobileNavProps) {
     return (
         <motion.div
             initial={false}
@@ -22,18 +24,19 @@ export default function MobileNav({ isMobileMenuOpen, scrollToSection, navItems 
         >
             <div className="py-4 space-y-4 border-t border-border">
                 {navItems.map((item) => (
-                    <motion.a
+                    <MotionLink
                         key={item.name}
                         href={item.href}
                         onClick={(e) => {
                             e.preventDefault();
                             scrollToSection(item.href);
+                            onClick();
                         }}
                         className="block text-foreground hover:text-primary transition-smooth"
                         whileHover={{ x: 5 }}
                     >
                         {item.name}
-                    </motion.a>
+                    </MotionLink>
                 ))}
                 <div className="pt-2">
                     <HeroButton variant="hero" size="sm" className="w-full">
