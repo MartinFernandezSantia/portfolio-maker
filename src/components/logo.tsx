@@ -14,7 +14,7 @@ export default function Logo({ onClick }: LogoProps) {
                 scrollToSection("#");
                 onClick();
             }}
-            className="text-xl font-bold gradient-text"
+            className="text-xl font-bold gradient-text logo"
             whileHover={{ scale: 1.05 }}
         >
             Alex Johnson

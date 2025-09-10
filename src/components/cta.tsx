@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion'
 import { HeroButton } from '@/components/ui/button-variants'
 import { scrollToSection } from '@/lib/utils'
-import { Button } from './ui/button'
 
 export default function CTA() {
     return (
@@ -13,6 +12,13 @@ export default function CTA() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
         >
+            <HeroButton
+                variant="outline"
+                size="lg"
+                onClick={() => scrollToSection('#contact')}>
+                Get In Touch
+            </HeroButton>
+
             <HeroButton
                 variant="hero"
                 size="lg"
@@ -28,12 +34,7 @@ export default function CTA() {
                 </motion.span>
             </HeroButton>
 
-            <HeroButton
-                variant="outline"
-                size="lg"
-                onClick={() => scrollToSection('#contact')}>
-                Get In Touch
-            </HeroButton>
+
 
         </motion.div>
     )
