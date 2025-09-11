@@ -58,7 +58,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-20 relative">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         <H2
           subtitle="Here are some of my recent projects that showcase my skills and passion for creating
             innovative web solutions."

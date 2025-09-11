@@ -31,7 +31,7 @@ const Education = () => {
 
   return (
     <section id="education" className="py-20 relative">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
 
         <H2 subtitle="Continuous learning and professional development">
           Education & <span className="gradient-text">Certifications</span>
