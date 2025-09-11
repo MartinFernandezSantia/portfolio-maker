@@ -1,6 +1,7 @@
 "use client";
 
 import { Code2, Lightbulb, Users, Zap } from "lucide-react";
+import { Atom, Box, Cloud, Database, FileText, Globe, Palette, Server } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card } from "../ui/card";
 
@@ -90,19 +91,28 @@ const About = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              "React", "TypeScript", "Node.js", "Next.js", "TailwindCSS", 
-              "PostgreSQL", "MongoDB", "AWS", "Docker", "GraphQL"
+              { name: "React", icon: Atom },
+              { name: "TypeScript", icon: FileText },
+              { name: "Node.js", icon: Server },
+              { name: "Next.js", icon: Zap },
+              { name: "TailwindCSS", icon: Palette },
+              { name: "PostgreSQL", icon: Database },
+              { name: "MongoDB", icon: Database },
+              { name: "AWS", icon: Cloud },
+              { name: "Docker", icon: Box },
+              { name: "GraphQL", icon: Globe }
             ].map((tech, index) => (
-              <motion.span
-                key={tech}
+              <motion.div
+                key={tech.name}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="px-4 py-2 bg-secondary rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-smooth cursor-default"
+                className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-smooth cursor-default group"
               >
-                {tech}
-              </motion.span>
+                <tech.icon className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                <span>{tech.name}</span>
+              </motion.div>
             ))}
           </div>
         </motion.div>
