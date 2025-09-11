@@ -32,7 +32,7 @@ const About = () => {
 
   return (
     <section id="about" className="py-20 relative">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -44,8 +44,8 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            I'm a passionate full-stack developer with over 5 years of experience creating 
-            digital solutions that make a difference. I specialize in React, Node.js, and 
+            I&apos;m a passionate full-stack developer with over 5 years of experience creating
+            digital solutions that make a difference. I specialize in React, Node.js, and
             modern web technologies, always focusing on clean code and user experience.
           </p>
         </motion.div>
@@ -91,16 +91,8 @@ const About = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              { name: "React", icon: Atom },
-              { name: "TypeScript", icon: FileText },
-              { name: "Node.js", icon: Server },
-              { name: "Next.js", icon: Zap },
-              { name: "TailwindCSS", icon: Palette },
-              { name: "PostgreSQL", icon: Database },
-              { name: "MongoDB", icon: Database },
-              { name: "AWS", icon: Cloud },
-              { name: "Docker", icon: Box },
-              { name: "GraphQL", icon: Globe }
+              "React", "TypeScript", "Node.js", "Next.js", "TailwindCSS",
+              "PostgreSQL", "MongoDB", "AWS", "Docker", "GraphQL"
             ].map((tech, index) => (
               <motion.div
                 key={tech.name}

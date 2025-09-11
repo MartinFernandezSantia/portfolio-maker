@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* @custom-variant dark (&:is(.dark *)); */
 
 :root {
   --background: oklch(1.0000 0 0);
@@ -50,6 +50,14 @@
   --shadow-2xl: 0px 4px 10px 0px hsl(0 0% 0% / 0.25);
   --tracking-normal: 0px;
   --spacing: 0.25rem;
+
+  /* Portfolio-specific tokens */
+  /* --gradient-primary: linear-gradient(135deg, oklch(0.5173 0.1793 27.34), oklch(0.5134 0.1603 255.67)); */
+  --gradient-secondary: linear-gradient(135deg, oklch(0.2739 0.0055 286.0326), oklch(0.9851 0 0));
+  --glow: 0 0 20px oklch(0.5173 0.1793 27.34 / 0.3);
+  --glow-strong: 0 0 60px oklch(0.5173 0.1793 27.34 / 0.5);
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
 }
 
 .dark {
@@ -97,6 +105,12 @@
   --shadow-lg: 0px 4px 10px 0px hsl(0 0% 0% / 0.50), 0px 4px 6px -1px hsl(0 0% 0% / 0.50);
   --shadow-xl: 0px 4px 10px 0px hsl(0 0% 0% / 0.50), 0px 8px 10px -1px hsl(0 0% 0% / 0.50);
   --shadow-2xl: 0px 4px 10px 0px hsl(0 0% 0% / 1.25);
+}
+
+@theme {
+  --background-image-gradient-primary: linear-gradient(135deg, oklch(0.5173 0.1793 27.34), oklch(0.5134 0.1603 255.67));
+  --gradient-primary: linear-gradient(135deg, oklch(0.5173 0.1793 27.34), oklch(0.5134 0.1603 255.67));
+
 }
 
 @theme inline {
@@ -199,9 +213,11 @@ body {
   #__next {
     @apply min-h-screen;
   }
+
 }
 
 @layer utilities {
+
   /* Custom utility classes using design tokens */
   .gradient-text {
     background: var(--gradient-primary);
@@ -218,10 +234,6 @@ body {
     box-shadow: var(--glow-strong);
   }
 
-  .transition-smooth {
-    transition: var(--transition-smooth);
-  }
-
   /* Responsive container utilities */
   .container-prose {
     @apply mx-auto max-w-prose px-4;
@@ -230,4 +242,17 @@ body {
   .container-wide {
     @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
   }
+}
+
+.logo {
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
 }

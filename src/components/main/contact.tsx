@@ -51,7 +51,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 relative">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -63,8 +63,8 @@ const Contact = () => {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or just want to chat? I'd love to hear from you. 
-            Let's create something amazing together.
+            Have a project in mind or just want to chat? I&apos;d love to hear from you.
+            Let&apos;s create something amazing together.
           </p>
         </motion.div>
 
@@ -93,7 +93,7 @@ const Contact = () => {
                     className="transition-smooth focus:glow"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium mb-2">
                     Email
@@ -109,7 +109,7 @@ const Contact = () => {
                     className="transition-smooth focus:glow"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium mb-2">
                     Message
@@ -125,7 +125,7 @@ const Contact = () => {
                     className="transition-smooth focus:glow resize-none"
                   />
                 </div>
-                
+
                 <HeroButton type="submit" variant="hero" size="lg" className="w-full group">
                   <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-smooth" />
                   Send Message
@@ -145,7 +145,7 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
               <p className="text-muted-foreground mb-8">
-                I'm always open to discussing new opportunities, interesting projects, 
+                I&apos;m always open to discussing new opportunities, interesting projects,
                 or just having a conversation about technology and development.
               </p>
             </div>
