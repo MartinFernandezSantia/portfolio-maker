@@ -21,6 +21,7 @@ const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
+            className="text-center md:text-start"
           >
             <h3 className="text-xl font-bold gradient-text mb-2">Alex Johnson</h3>
             <p className="text-muted-foreground text-sm">
@@ -72,7 +73,7 @@ const Footer = () => {
           viewport={{ once: true }}
           className="border-t border-border mt-8 pt-8 text-center"
         >
-          <p className="text-sm text-muted-foreground flex items-center justify-center gap-2">
+          <p className="text-sm text-muted-foreground flex flex-col md:flex-row items-center md:justify-center gap-2">
             © {currentYear} Alex Johnson. Made with
             <motion.span
               animate={{ scale: [1, 1.2, 1] }}
