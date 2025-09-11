@@ -1,3 +1,5 @@
+"use client";
+
 import { MotionLink } from "./motion-link";
 import { scrollToSection } from "@/lib/utils";
 

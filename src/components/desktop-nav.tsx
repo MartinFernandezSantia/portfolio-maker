@@ -1,4 +1,5 @@
-import React from 'react'
+"use client";
+
 import { HeroButton } from './ui/button-variants';
 import { NavItem } from '@/lib/types';
 import { MotionLink } from './motion-link';

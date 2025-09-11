@@ -49,7 +49,7 @@ export const Navigation = () => {
                 <div className="flex items-center justify-between h-16">
                     <Logo onClick={closeMobileMenu} />
 
-                    <div className="hidden md:flex items-center space-x-8">
+                    <div className="hidden lg:flex items-center space-x-8">
                         <DesktopNav onClick={closeMobileMenu} navItems={navItems} />
                     </div>
 

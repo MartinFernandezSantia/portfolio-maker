@@ -1,4 +1,5 @@
-import React from 'react'
+"use client";
+
 import { motion } from "framer-motion";
 import { HeroButton } from './ui/button-variants';
 import { NavItem } from '@/lib/types';
@@ -20,15 +21,14 @@ export default function MobileNav({ isMobileMenuOpen, onClick, navItems }: Mobil
                 opacity: isMobileMenuOpen ? 1 : 0,
             }}
             transition={{ duration: 0.3 }}
-            className="md:hidden overflow-hidden"
+            className="lg:hidden overflow-hidden"
         >
             <div className="py-4 space-y-4 border-t border-border">
                 {navItems.map((item) => (
                     <MotionLink
                         key={item.name}
                         href={item.href}
-                        onClick={(e) => {
-                            e.preventDefault();
+                        onClick={() => {
                             scrollToSection(item.href);
                             onClick();
                         }}

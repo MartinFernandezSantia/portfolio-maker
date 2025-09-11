@@ -43,8 +43,8 @@ const About = () => {
             About <span className="gradient-text">Me</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            I'm a passionate full-stack developer with over 5 years of experience creating 
-            digital solutions that make a difference. I specialize in React, Node.js, and 
+            I&apos;m a passionate full-stack developer with over 5 years of experience creating
+            digital solutions that make a difference. I specialize in React, Node.js, and
             modern web technologies, always focusing on clean code and user experience.
           </p>
         </motion.div>
@@ -90,7 +90,7 @@ const About = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              "React", "TypeScript", "Node.js", "Next.js", "TailwindCSS", 
+              "React", "TypeScript", "Node.js", "Next.js", "TailwindCSS",
               "PostgreSQL", "MongoDB", "AWS", "Docker", "GraphQL"
             ].map((tech, index) => (
               <motion.span

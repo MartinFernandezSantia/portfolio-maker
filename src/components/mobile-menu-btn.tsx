@@ -1,4 +1,5 @@
-import React from 'react'
+"use client";
+
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -11,7 +12,7 @@ export default function MobileMenuButton({ isMobileMenuOpen, setIsMobileMenuOpen
     return (
         <motion.button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-foreground hover:text-primary transition-smooth"
+            className="lg:hidden p-2 text-foreground hover:text-primary transition-smooth"
             whileTap={{ scale: 0.95 }}
             aria-label="Toggle mobile menu"
         >

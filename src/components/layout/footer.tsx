@@ -37,7 +37,7 @@ const Footer = () => {
             className="text-center"
           >
             <p className="text-sm text-muted-foreground">
-              Let's create something amazing together
+              Let&apos;s create something amazing together
             </p>
           </motion.div>
 

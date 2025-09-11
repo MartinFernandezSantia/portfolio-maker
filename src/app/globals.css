@@ -234,10 +234,6 @@ body {
     box-shadow: var(--glow-strong);
   }
 
-  .transition-smooth {
-    transition: var(--transition-smooth);
-  }
-
   /* Responsive container utilities */
   .container-prose {
     @apply mx-auto max-w-prose px-4;

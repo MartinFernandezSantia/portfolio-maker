@@ -1,4 +1,3 @@
-"use client";
 
 import H1 from "../h1";
 import Subtitle from "../subtitle";
@@ -6,12 +5,8 @@ import Avatar from "../avatar";
 import CTA from "../cta";
 import Socials from "../socials";
 import ScrollDown from "../scroll-down";
-import { scrollToSection } from "@/lib/utils";
 
 const Hero = () => {
-  const scrollToAbout = () => {
-    scrollToSection("#about");
-  };
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -25,7 +20,7 @@ const Hero = () => {
             <span className="gradient-text">Alex Johnson</span>
           </H1>
 
-          <Subtitle>
+          <Subtitle size="lg">
             Full Stack Developer crafting beautiful, functional web experiences
             with modern technologies and clean code.
           </Subtitle>
@@ -36,7 +31,7 @@ const Hero = () => {
         </div>
       </div>
 
-      <ScrollDown scrollToNextSection={scrollToAbout} />
+      <ScrollDown scrollTo={"#about"} />
     </section>
   );
 };
