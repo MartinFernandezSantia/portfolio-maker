@@ -1,4 +1,7 @@
+"use client";
+
 import placeholder from "@/public/placeholder.svg";
+import { useState } from 'react';
 import H2 from "../h2";
 import { ProjectItem } from "@/lib/types";
 import ProjectsCarousel from "../projects-carousel";
@@ -55,6 +58,8 @@ const projects: ProjectItem[] = [
 ];
 
 const Projects = () => {
+  const [showAll, setShowAll] = useState(false);
+  const displayedProjects = showAll ? projects : projects.slice(0, 3);
 
   return (
     <section id="projects" className="py-20 relative">
@@ -66,7 +71,18 @@ const Projects = () => {
           Featured <span className="gradient-text">Projects</span>
         </H2>
 
-        <ProjectsCarousel projects={projects} />
+        <ProjectsCarousel projects={displayedProjects} />
+        
+        {projects.length > 3 && (
+          <div className="mt-8 text-center">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="px-6 py-2 rounded-lg bg-primary text-primary-foreground hover:opacity-90 transition-opacity"
+            >
+              {showAll ? 'Show Less' : 'Show More'}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
