@@ -91,8 +91,16 @@ const About = () => {
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
             {[
-              "React", "TypeScript", "Node.js", "Next.js", "TailwindCSS",
-              "PostgreSQL", "MongoDB", "AWS", "Docker", "GraphQL"
+              { name: "React", icon: Atom },
+              { name: "TypeScript", icon: FileText },
+              { name: "Node.js", icon: Server },
+              { name: "Next.js", icon: Box },
+              { name: "TailwindCSS", icon: Palette },
+              { name: "PostgreSQL", icon: Database },
+              { name: "MongoDB", icon: Cloud },
+              { name: "AWS", icon: Globe },
+              { name: "Docker", icon: Box },
+              { name: "GraphQL", icon: Atom }
             ].map((tech, index) => (
               <motion.div
                 key={tech.name}
