@@ -3,14 +3,26 @@
 import React, { createContext, useContext, useReducer, ReactNode } from 'react';
 
 // Types for portfolio data
+export interface Hero {
+  firstName: string;
+  lastName: string;
+  headline: string;
+}
+
+export interface Feature {
+  title: string;
+  description: string;
+}
+
 export interface AboutMe {
-  profilePhoto?: File;
+  profilePhoto?: File | null;
   fullName: string;
   githubLink: string;
   linkedinLink: string;
   email: string;
   aboutMe: string;
   techStack: string[];
+  features: Feature[];
 }
 
 export interface WorkExperience {
@@ -44,6 +56,7 @@ export interface Project {
 }
 
 export interface PortfolioState {
+  hero: Hero;
   aboutMe: AboutMe;
   workExperience: WorkExperience[];
   education: Education[];
@@ -53,12 +66,19 @@ export interface PortfolioState {
 
 // Initial state
 const initialState: PortfolioState = {
+  hero: {
+    firstName: "",
+    lastName: "",
+    headline: "",
+  },
   aboutMe: {
-    fullName: '',
-    githubLink: '',
-    linkedinLink: '',
-    email: '',
-    aboutMe: '',
+    profilePhoto: null,
+    fullName: "",
+    githubLink: "",
+    linkedinLink: "",
+    email: "",
+    aboutMe: "",
+    features: [],
     techStack: [],
   },
   workExperience: [],
@@ -69,6 +89,7 @@ const initialState: PortfolioState = {
 
 // Action types
 type PortfolioAction =
+  | { type: "UPDATE_HERO"; payload: Partial<Hero> }
   | { type: 'UPDATE_ABOUT_ME'; payload: Partial<AboutMe> }
   | { type: 'ADD_WORK_EXPERIENCE'; payload: WorkExperience }
   | { type: 'UPDATE_WORK_EXPERIENCE'; payload: { id: string; data: Partial<WorkExperience> } }
@@ -84,6 +105,11 @@ type PortfolioAction =
 // Reducer
 function portfolioReducer(state: PortfolioState, action: PortfolioAction): PortfolioState {
   switch (action.type) {
+     case "UPDATE_HERO":
+      return {
+        ...state,
+        hero: { ...state.hero, ...action.payload },
+      };
     case 'UPDATE_ABOUT_ME':
       return {
         ...state,

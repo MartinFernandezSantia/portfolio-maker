@@ -24,10 +24,30 @@ import EducationCertificationsForm from '../EducationCertificacionsForm/page';
 import FeaturedProjectsForm from '../FeaturedProjectsForm/page';
 import heroImage from '@/assets/hero-portfolio.jpg';
 import ThemeToggle from '@/components/theme-toggle';
+import { useRouter } from "next/navigation";
+import router from 'next/router';
 
 export default function Page() {
   return <PortfolioDashboard />;
 }
+
+function PreviewButton() {
+  const router = useRouter();
+
+  return (
+    <Button
+      variant="outline"
+      className="w-full justify-start"
+      size="sm"
+      onClick={() => router.push("/preview")}
+    >
+      <Eye className="w-4 h-4 mr-2" />
+      Preview Portfolio
+    </Button>
+  );
+}
+
+
 
 const navigationItems = [
   {
@@ -124,16 +144,9 @@ function PortfolioSidebar({ collapsed, onToggle }: { collapsed: boolean; onToggl
             
         {/* Action Buttons */}
        <div className="space-y-3">
-  <Button
-    variant="outline"
-    className="w-full justify-start"
-    size="sm"
-    onClick={() => window.open("/preview", "_blank")}
-  >
-    <Eye className="w-4 h-4 mr-2" />
-    Preview Portfolio
-  </Button>
 
+<div className="space-y-3">
+  <PreviewButton />
   <Button
     className="btn-gradient w-full justify-start"
     size="sm"
@@ -142,6 +155,7 @@ function PortfolioSidebar({ collapsed, onToggle }: { collapsed: boolean; onToggl
     <Download className="w-4 h-4 mr-2" />
     Generate Portfolio
   </Button>
+</div>
 </div>
           </>
         )}

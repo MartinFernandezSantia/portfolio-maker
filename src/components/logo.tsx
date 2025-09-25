@@ -2,12 +2,16 @@
 
 import { MotionLink } from "./motion-link";
 import { scrollToSection } from "@/lib/utils";
+import { usePortfolio } from "@/contexts/PortfolioContext";
 
 type LogoProps = {
     onClick: () => void;
-}
+};
 
 export default function Logo({ onClick }: LogoProps) {
+    const { state } = usePortfolio();
+    const { aboutMe } = state;
+
     return (
         <MotionLink
             href="#"
@@ -19,7 +23,7 @@ export default function Logo({ onClick }: LogoProps) {
             className="text-xl font-bold gradient-text logo"
             whileHover={{ scale: 1.05 }}
         >
-            Alex Johnson
+            {aboutMe?.fullName || "Mi Portfolio"}
         </MotionLink>
-    )
+    );
 }

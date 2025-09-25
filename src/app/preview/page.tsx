@@ -9,11 +9,9 @@ import Contact from "@/components/main/contact";
 import Hero from "@/components/main/hero";
 import Footer from "@/components/layout/footer";
 import Background from "@/components/background";
-import { generatePortfolioPDF } from "@/lib/utils"
-import { Button } from "@/components/ui/button";
-import { Download } from "lucide-react";
+import { PortfolioState } from "@/contexts/PortfolioContext";
 
-export default function PreviewPage() {
+export default function PreviewPage({ state }: { state: PortfolioState }) {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <div className="flex justify-end p-4">
@@ -24,7 +22,7 @@ export default function PreviewPage() {
         <Background />
         <Navigation />
         <main className="my-5 px-6">
-          <Hero />
+         
           <About />
           <Experience />
           <Education />

@@ -1,48 +1,41 @@
+"use client";
+
 import H2 from "../h2";
-import { EducationItem } from "@/lib/types";
 import EducationList from "../education-list";
 import CertificationList from "../certification-list";
-
-const education: EducationItem[] = [
-  {
-    degree: "Bachelor of Science in Computer Science",
-    school: "University of Technology",
-    period: "2015 - 2019",
-    grade: "Magna Cum Laude",
-    description: "Focused on software engineering, algorithms, and data structures. Active in programming competitions.",
-  },
-  {
-    degree: "Full Stack Web Development Bootcamp",
-    school: "Code Academy",
-    period: "2019",
-    grade: "Certificate",
-    description: "Intensive 12-week program covering modern web technologies and agile development practices.",
-  },
-];
+import { usePortfolio } from "@/contexts/PortfolioContext";
+import { EducationItem } from "@/lib/types";
 
 const Education = () => {
+  const { state } = usePortfolio();
+  const { education } = state;
 
-  const certifications = [
-    "AWS Certified Developer",
-    "Google Cloud Professional",
-    "React Advanced Patterns",
-    "Node.js Certification",
-  ];
+  // Mapper: transformamos Education → EducationItem
+  const formalEducation: EducationItem[] = education
+    .filter((edu) => edu.certificateType === "diploma" || edu.certificateType === "bootcamp")
+    .map((edu) => ({
+      degree: edu.title,
+      school: edu.academy,
+      period: `${edu.startDate} - ${edu.endDate || "Present"}`,
+      grade: edu.certificateType, // o algún campo equivalente, podés personalizar
+      description: edu.description,
+    }));
+
+  // Certifications: solo cursos/otros
+  const certifications: string[] = education
+    .filter((edu) => edu.certificateType === "course" || edu.certificateType === "other")
+    .map((edu) => edu.title);
 
   return (
     <section id="education" className="py-20 relative">
       <div className="container mx-auto">
-
         <H2 subtitle="Continuous learning and professional development">
           Education & <span className="gradient-text">Certifications</span>
         </H2>
 
         <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-
-          <EducationList education={education} />
-
+          <EducationList education={formalEducation} />
           <CertificationList certifications={certifications} />
-
         </div>
       </div>
     </section>

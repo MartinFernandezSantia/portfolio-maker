@@ -63,12 +63,13 @@ export function AboutMeForm() {
     });
   };
 
-  const getProfilePhotoUrl = () => {
-    if (aboutMe.profilePhoto) {
-      return URL.createObjectURL(aboutMe.profilePhoto);
-    }
-    return null;
-  };
+const getProfilePhotoUrl = () => {
+  if (aboutMe?.profilePhoto) {
+    return URL.createObjectURL(aboutMe.profilePhoto);
+  }
+  return null;
+};
+
 
 
   return (
@@ -173,6 +174,73 @@ export function AboutMeForm() {
               className="min-h-[120px] resize-none transition-all duration-300 focus:shadow-lg"
             />
           </div>
+            
+            {/* Features */}
+<div className="space-y-4">
+  <Label>Features</Label>
+
+  {aboutMe.features?.map((feature, index) => (
+    <div key={index} className="mb-4 border p-3 rounded space-y-2">
+      <Input
+        placeholder="Feature title"
+        value={feature.title}
+        onChange={(e) => {
+          const newFeatures = [...aboutMe.features];
+          newFeatures[index].title = e.target.value;
+          dispatch({
+            type: "UPDATE_ABOUT_ME",
+            payload: { features: newFeatures },
+          });
+        }}
+      />
+      <Textarea
+        placeholder="Feature description"
+        value={feature.description}
+        onChange={(e) => {
+          const newFeatures = [...aboutMe.features];
+          newFeatures[index].description = e.target.value;
+          dispatch({
+            type: "UPDATE_ABOUT_ME",
+            payload: { features: newFeatures },
+          });
+        }}
+      />
+      <Button
+        variant="ghost"
+        size="sm"
+        className="text-red-500"
+        onClick={() => {
+          const newFeatures = aboutMe.features.filter((_, i) => i !== index);
+          dispatch({
+            type: "UPDATE_ABOUT_ME",
+            payload: { features: newFeatures },
+          });
+        }}
+      >
+        Eliminar
+      </Button>
+    </div>
+  ))}
+
+  <Button
+    type="button"
+    variant="outline"
+    className="flex items-center gap-2"
+    onClick={() =>
+      dispatch({
+        type: "UPDATE_ABOUT_ME",
+        payload: {
+          features: [
+            ...(aboutMe.features || []),
+            { title: "", description: "" },
+          ],
+        },
+      })
+    }
+  >
+    <Plus className="w-4 h-4" /> Agregar Feature
+  </Button>
+</div>
 
           {/* Tech Stack */}
           <div className="space-y-4">

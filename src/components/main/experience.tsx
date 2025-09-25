@@ -1,32 +1,23 @@
-import H2 from "../h2";
-import { ExperienceItem } from "@/lib/types";
-import ExperienceTimeline from "../experience-timeline";
+"use client";
 
-const experience: ExperienceItem[] = [
-  {
-    title: "Senior Full Stack Developer",
-    company: "TechCorp Solutions",
-    location: "San Francisco, CA",
-    period: "2022 - Present",
-    description: "Led development of microservices architecture serving 100k+ users. Built scalable React applications with Node.js backends.",
-  },
-  {
-    title: "Frontend Developer",
-    company: "Digital Innovations",
-    location: "New York, NY",
-    period: "2020 - 2022",
-    description: "Developed responsive web applications using React and TypeScript. Collaborated with design teams to implement pixel-perfect UIs.",
-  },
-  {
-    title: "Junior Developer",
-    company: "StartupXYZ",
-    location: "Austin, TX",
-    period: "2019 - 2020",
-    description: "Built REST APIs and database schemas. Participated in agile development cycles and code reviews.",
-  },
-];
+import H2 from "../h2";
+import ExperienceTimeline from "../experience-timeline";
+import { usePortfolio } from "@/contexts/PortfolioContext";
 
 const Experience = () => {
+  const { state } = usePortfolio();
+  const { workExperience } = state;
+
+  // Mapear tus WorkExperience del contexto al formato esperado por ExperienceTimeline
+  const experiences = workExperience.map((exp) => ({
+    title: exp.specialty,
+    company: exp.company,
+    location: exp.location,
+    period: `${exp.startDate ? new Date(exp.startDate).toLocaleDateString("en-US", { year: "numeric", month: "short" }) : ""} - ${
+      exp.endDate ? new Date(exp.endDate).toLocaleDateString("en-US", { year: "numeric", month: "short" }) : "Present"
+    }`,
+    description: exp.description,
+  }));
 
   return (
     <section id="experience" className="py-20 relative">
@@ -34,8 +25,8 @@ const Experience = () => {
         Work <span className="gradient-text">Experience</span>
       </H2>
 
-      <ExperienceTimeline experiences={experience} />
-    </section >
+      <ExperienceTimeline experiences={experiences} />
+    </section>
   );
 };
 
