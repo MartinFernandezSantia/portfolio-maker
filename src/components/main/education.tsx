@@ -1,30 +1,43 @@
+// components/sections/education.tsx
 "use client";
 
 import H2 from "../h2";
 import EducationList from "../education-list";
 import CertificationList from "../certification-list";
 import { usePortfolio } from "@/contexts/PortfolioContext";
-import { EducationItem } from "@/lib/types";
+import { EducationItem, CertificationItem } from "@/lib/types";
 
 const Education = () => {
   const { state } = usePortfolio();
   const { education } = state;
 
-  // Mapper: transformamos Education → EducationItem
+  // 🎓 Educación formal (Diplomas, Bootcamps, etc.)
   const formalEducation: EducationItem[] = education
-    .filter((edu) => edu.certificateType === "diploma" || edu.certificateType === "bootcamp")
+    .filter(
+      (edu) =>
+        edu.certificateType === "diploma" || edu.certificateType === "bootcamp",
+    )
     .map((edu) => ({
       degree: edu.title,
       school: edu.academy,
       period: `${edu.startDate} - ${edu.endDate || "Present"}`,
-      grade: edu.certificateType, // o algún campo equivalente, podés personalizar
+      grade: edu.certificateType, // muestra "diploma" o "bootcamp"
       description: edu.description,
     }));
 
-  // Certifications: solo cursos/otros
-  const certifications: string[] = education
-    .filter((edu) => edu.certificateType === "course" || edu.certificateType === "other")
-    .map((edu) => edu.title);
+  // 🏅 Certificaciones, cursos y otros
+  const certifications: CertificationItem[] = education
+    .filter(
+      (edu) =>
+        edu.certificateType === "course" || edu.certificateType === "other",
+    )
+    .map((edu) => ({
+      name: edu.title,
+      issuer: edu.academy,
+      period: `${edu.startDate} - ${edu.endDate || "Present"}`,
+      type: edu.certificateType, // muestra "course" o "other"
+      description: edu.description,
+    }));
 
   return (
     <section id="education" className="py-20 relative">

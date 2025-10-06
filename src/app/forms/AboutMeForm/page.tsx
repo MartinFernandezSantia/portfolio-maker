@@ -1,28 +1,75 @@
 "use client";
 
-import React, { useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Camera, X, Plus } from 'lucide-react';
-import { usePortfolio } from '@/contexts/PortfolioContext';
+import React, { useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Badge } from "@/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Camera, X, Plus } from "lucide-react";
+import { usePortfolio } from "@/contexts/PortfolioContext";
 
 export default function Page() {
   return <AboutMeForm />;
 }
 
 const techStackOptions = [
-  'React', 'Next.js', 'Vue.js', 'Angular', 'TypeScript', 'JavaScript',
-  'Node.js', 'Express', 'Python', 'Django', 'Flask', 'Java', 'Spring',
-  'C#', '.NET', 'PHP', 'Laravel', 'Ruby', 'Rails', 'Go', 'Rust',
-  'MongoDB', 'PostgreSQL', 'MySQL', 'Redis', 'Docker', 'Kubernetes',
-  'AWS', 'Azure', 'GCP', 'Git', 'GraphQL', 'REST API', 'TailwindCSS',
-  'Material-UI', 'Bootstrap', 'Sass', 'Webpack', 'Vite', 'Jest', 'Cypress'
+  "React",
+  "Next.js",
+  "Vue.js",
+  "Angular",
+  "TypeScript",
+  "JavaScript",
+  "Node.js",
+  "Express",
+  "Python",
+  "Django",
+  "Flask",
+  "Java",
+  "Spring",
+  "C#",
+  ".NET",
+  "PHP",
+  "Laravel",
+  "Ruby",
+  "Rails",
+  "Go",
+  "Rust",
+  "MongoDB",
+  "PostgreSQL",
+  "MySQL",
+  "Redis",
+  "Docker",
+  "Kubernetes",
+  "AWS",
+  "Azure",
+  "GCP",
+  "Git",
+  "GraphQL",
+  "REST API",
+  "TailwindCSS",
+  "Material-UI",
+  "Bootstrap",
+  "Sass",
+  "Webpack",
+  "Vite",
+  "Jest",
+  "Cypress",
 ];
 
 export function AboutMeForm() {
@@ -32,7 +79,7 @@ export function AboutMeForm() {
 
   const handleInputChange = (field: string, value: string) => {
     dispatch({
-      type: 'UPDATE_ABOUT_ME',
+      type: "UPDATE_ABOUT_ME",
       payload: { [field]: value },
     });
   };
@@ -41,7 +88,7 @@ export function AboutMeForm() {
     const file = event.target.files?.[0];
     if (file) {
       dispatch({
-        type: 'UPDATE_ABOUT_ME',
+        type: "UPDATE_ABOUT_ME",
         payload: { profilePhoto: file },
       });
     }
@@ -50,7 +97,7 @@ export function AboutMeForm() {
   const addTechStack = (tech: string) => {
     if (!aboutMe.techStack.includes(tech)) {
       dispatch({
-        type: 'UPDATE_ABOUT_ME',
+        type: "UPDATE_ABOUT_ME",
         payload: { techStack: [...aboutMe.techStack, tech] },
       });
     }
@@ -58,19 +105,19 @@ export function AboutMeForm() {
 
   const removeTechStack = (tech: string) => {
     dispatch({
-      type: 'UPDATE_ABOUT_ME',
-      payload: { techStack: aboutMe.techStack.filter((t: string) => t !== tech) },
+      type: "UPDATE_ABOUT_ME",
+      payload: {
+        techStack: aboutMe.techStack.filter((t: string) => t !== tech),
+      },
     });
   };
 
-const getProfilePhotoUrl = () => {
-  if (aboutMe?.profilePhoto) {
-    return URL.createObjectURL(aboutMe.profilePhoto);
-  }
-  return null;
-};
-
-
+  const getProfilePhotoUrl = () => {
+    if (aboutMe?.profilePhoto) {
+      return URL.createObjectURL(aboutMe.profilePhoto);
+    }
+    return null;
+  };
 
   return (
     <div className="space-y-6">
@@ -90,7 +137,11 @@ const getProfilePhotoUrl = () => {
               <Avatar className="w-32 h-32 border-4 border-primary/20">
                 <AvatarImage src={getProfilePhotoUrl() || undefined} />
                 <AvatarFallback className="text-2xl bg-gradient-to-br from-primary to-secondary text-white">
-                  {aboutMe.fullName ? aboutMe.fullName.charAt(0).toUpperCase() : <Camera />}
+                  {aboutMe.fullName ? (
+                    aboutMe.fullName.charAt(0).toUpperCase()
+                  ) : (
+                    <Camera />
+                  )}
                 </AvatarFallback>
               </Avatar>
               <Button
@@ -121,7 +172,7 @@ const getProfilePhotoUrl = () => {
               <Input
                 id="fullName"
                 value={aboutMe.fullName}
-                onChange={(e) => handleInputChange('fullName', e.target.value)}
+                onChange={(e) => handleInputChange("fullName", e.target.value)}
                 placeholder="John Doe"
                 className="transition-all duration-300 focus:shadow-lg"
               />
@@ -132,7 +183,7 @@ const getProfilePhotoUrl = () => {
                 id="email"
                 type="email"
                 value={aboutMe.email}
-                onChange={(e) => handleInputChange('email', e.target.value)}
+                onChange={(e) => handleInputChange("email", e.target.value)}
                 placeholder="john@example.com"
                 className="transition-all duration-300 focus:shadow-lg"
               />
@@ -146,7 +197,9 @@ const getProfilePhotoUrl = () => {
               <Input
                 id="githubLink"
                 value={aboutMe.githubLink}
-                onChange={(e) => handleInputChange('githubLink', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("githubLink", e.target.value)
+                }
                 placeholder="https://github.com/johndoe"
                 className="transition-all duration-300 focus:shadow-lg"
               />
@@ -156,7 +209,9 @@ const getProfilePhotoUrl = () => {
               <Input
                 id="linkedinLink"
                 value={aboutMe.linkedinLink}
-                onChange={(e) => handleInputChange('linkedinLink', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange("linkedinLink", e.target.value)
+                }
                 placeholder="https://linkedin.com/in/johndoe"
                 className="transition-all duration-300 focus:shadow-lg"
               />
@@ -169,78 +224,80 @@ const getProfilePhotoUrl = () => {
             <Textarea
               id="aboutMe"
               value={aboutMe.aboutMe}
-              onChange={(e) => handleInputChange('aboutMe', e.target.value)}
+              onChange={(e) => handleInputChange("aboutMe", e.target.value)}
               placeholder="Tell us about yourself, your passion, and your soft skills..."
               className="min-h-[120px] resize-none transition-all duration-300 focus:shadow-lg"
             />
           </div>
-            
-            {/* Features */}
-<div className="space-y-4">
-  <Label>Features</Label>
 
-  {aboutMe.features?.map((feature, index) => (
-    <div key={index} className="mb-4 border p-3 rounded space-y-2">
-      <Input
-        placeholder="Feature title"
-        value={feature.title}
-        onChange={(e) => {
-          const newFeatures = [...aboutMe.features];
-          newFeatures[index].title = e.target.value;
-          dispatch({
-            type: "UPDATE_ABOUT_ME",
-            payload: { features: newFeatures },
-          });
-        }}
-      />
-      <Textarea
-        placeholder="Feature description"
-        value={feature.description}
-        onChange={(e) => {
-          const newFeatures = [...aboutMe.features];
-          newFeatures[index].description = e.target.value;
-          dispatch({
-            type: "UPDATE_ABOUT_ME",
-            payload: { features: newFeatures },
-          });
-        }}
-      />
-      <Button
-        variant="ghost"
-        size="sm"
-        className="text-red-500"
-        onClick={() => {
-          const newFeatures = aboutMe.features.filter((_, i) => i !== index);
-          dispatch({
-            type: "UPDATE_ABOUT_ME",
-            payload: { features: newFeatures },
-          });
-        }}
-      >
-        Eliminar
-      </Button>
-    </div>
-  ))}
+          {/* Features */}
+          <div className="space-y-4">
+            <Label>Features</Label>
 
-  <Button
-    type="button"
-    variant="outline"
-    className="flex items-center gap-2"
-    onClick={() =>
-      dispatch({
-        type: "UPDATE_ABOUT_ME",
-        payload: {
-          features: [
-            ...(aboutMe.features || []),
-            { title: "", description: "" },
-          ],
-        },
-      })
-    }
-  >
-    <Plus className="w-4 h-4" /> Agregar Feature
-  </Button>
-</div>
+            {aboutMe.features?.map((feature, index) => (
+              <div key={index} className="mb-4 border p-3 rounded space-y-2">
+                <Input
+                  placeholder="Feature title"
+                  value={feature.title}
+                  onChange={(e) => {
+                    const newFeatures = [...aboutMe.features];
+                    newFeatures[index].title = e.target.value;
+                    dispatch({
+                      type: "UPDATE_ABOUT_ME",
+                      payload: { features: newFeatures },
+                    });
+                  }}
+                />
+                <Textarea
+                  placeholder="Feature description"
+                  value={feature.description}
+                  onChange={(e) => {
+                    const newFeatures = [...aboutMe.features];
+                    newFeatures[index].description = e.target.value;
+                    dispatch({
+                      type: "UPDATE_ABOUT_ME",
+                      payload: { features: newFeatures },
+                    });
+                  }}
+                />
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-red-500"
+                  onClick={() => {
+                    const newFeatures = aboutMe.features.filter(
+                      (_, i) => i !== index,
+                    );
+                    dispatch({
+                      type: "UPDATE_ABOUT_ME",
+                      payload: { features: newFeatures },
+                    });
+                  }}
+                >
+                  Eliminar
+                </Button>
+              </div>
+            ))}
+
+            <Button
+              type="button"
+              variant="outline"
+              className="flex items-center gap-2"
+              onClick={() =>
+                dispatch({
+                  type: "UPDATE_ABOUT_ME",
+                  payload: {
+                    features: [
+                      ...(aboutMe.features || []),
+                      { title: "", description: "" },
+                    ],
+                  },
+                })
+              }
+            >
+              <Plus className="w-4 h-4" /> Agregar Feature
+            </Button>
+          </div>
 
           {/* Tech Stack */}
           <div className="space-y-4">
@@ -251,7 +308,7 @@ const getProfilePhotoUrl = () => {
               </SelectTrigger>
               <SelectContent>
                 {techStackOptions
-                  .filter(tech => !aboutMe.techStack.includes(tech))
+                  .filter((tech) => !aboutMe.techStack.includes(tech))
                   .map((tech) => (
                     <SelectItem key={tech} value={tech}>
                       {tech}
@@ -259,7 +316,7 @@ const getProfilePhotoUrl = () => {
                   ))}
               </SelectContent>
             </Select>
-            
+
             {/* Selected Tech Stack */}
             {aboutMe.techStack.length > 0 && (
               <div className="flex flex-wrap gap-2">

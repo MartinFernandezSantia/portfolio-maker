@@ -14,15 +14,12 @@ import { PortfolioState } from "@/contexts/PortfolioContext";
 export default function PreviewPage({ state }: { state: PortfolioState }) {
   return (
     <div className="min-h-screen relative overflow-hidden">
-      <div className="flex justify-end p-4">
-
-      </div>
+      <div className="flex justify-end p-4"></div>
 
       <div id="portfolio-content">
         <Background />
         <Navigation />
         <main className="my-5 px-6">
-         
           <About />
           <Experience />
           <Education />

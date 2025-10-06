@@ -9,12 +9,12 @@ const About = () => {
   const { state } = usePortfolio();
   const { aboutMe } = state;
 
-const getProfilePhotoUrl = (): string | undefined => {
-  if (aboutMe.profilePhoto) {
-    return URL.createObjectURL(aboutMe.profilePhoto);
-  }
-  return undefined;
-};
+  const getProfilePhotoUrl = (): string | undefined => {
+    if (aboutMe.profilePhoto) {
+      return URL.createObjectURL(aboutMe.profilePhoto);
+    }
+    return undefined;
+  };
 
   return (
     <section id="about" className="py-20 relative">
@@ -27,12 +27,12 @@ const getProfilePhotoUrl = (): string | undefined => {
           viewport={{ once: true }}
           className="text-center mb-16 flex flex-col items-center"
         >
-           {getProfilePhotoUrl() && (
+          {getProfilePhotoUrl() && (
             <img
-            src={getProfilePhotoUrl()}
-             alt={aboutMe.fullName || "Profile"}
-             className="w-32 h-32 rounded-full object-cover"
-/>
+              src={getProfilePhotoUrl()}
+              alt={aboutMe.fullName || "Profile"}
+              className="w-32 h-32 rounded-full object-cover"
+            />
           )}
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -65,30 +65,29 @@ const getProfilePhotoUrl = (): string | undefined => {
             )}
           </div>
         </motion.div>
-{/* Features dinámicos */}
-{aboutMe.features && aboutMe.features.length > 0 && (
-  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-    {aboutMe.features.map((feature, index) => (
-      <motion.div
-        key={index}
-        initial={{ y: 50, opacity: 0 }}
-        whileInView={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, delay: index * 0.1 }}
-        viewport={{ once: true }}
-      >
-        <Card className="p-6 h-full hover:glow transition-smooth group">
-          <h3 className="text-xl font-semibold mb-3 group-hover:gradient-text transition-smooth">
-            {feature.title || "Untitled Feature"}
-          </h3>
-          <p className="text-muted-foreground">
-            {feature.description || "No description provided."}
-          </p>
-        </Card>
-      </motion.div>
-    ))}
-  </div>
-)}
-
+        {/* Features dinámicos */}
+        {aboutMe.features && aboutMe.features.length > 0 && (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+            {aboutMe.features.map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ y: 50, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Card className="p-6 h-full hover:glow transition-smooth group">
+                  <h3 className="text-xl font-semibold mb-3 group-hover:gradient-text transition-smooth">
+                    {feature.title || "Untitled Feature"}
+                  </h3>
+                  <p className="text-muted-foreground">
+                    {feature.description || "No description provided."}
+                  </p>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         {/* Tech Stack dinámico */}
         {aboutMe.techStack.length > 0 && (

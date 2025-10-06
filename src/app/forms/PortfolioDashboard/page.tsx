@@ -1,44 +1,44 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 import { generatePortfolioPDF } from "@/lib/utils";
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { 
-  User, 
-  Briefcase, 
-  GraduationCap, 
-  FolderOpen, 
-  Eye, 
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  User,
+  Briefcase,
+  GraduationCap,
+  FolderOpen,
+  Eye,
   Download,
   Menu,
   ChevronLeft,
-  ChevronRight
-} from 'lucide-react';
-import { usePortfolio } from '@/contexts/PortfolioContext';
-import AboutMeForm from '../AboutMeForm/page';
-import WorkExperienceForm from '../WorkExperienceForm/page';
-import EducationCertificationsForm from '../EducationCertificacionsForm/page';
-import FeaturedProjectsForm from '../FeaturedProjectsForm/page';
-import heroImage from '@/assets/hero-portfolio.jpg';
-import ThemeToggle from '@/components/theme-toggle';
+  ChevronRight,
+} from "lucide-react";
+import { usePortfolio } from "@/contexts/PortfolioContext";
+import AboutMeForm from "../AboutMeForm/page";
+import WorkExperienceForm from "../WorkExperienceForm/page";
+import EducationCertificationsForm from "../EducationCertificacionsForm/page";
+import FeaturedProjectsForm from "../FeaturedProjectsForm/page";
+import heroImage from "@/assets/hero-portfolio.jpg";
+import ThemeToggle from "@/components/theme-toggle";
 import { useRouter } from "next/navigation";
-import router from 'next/router';
+import router from "next/router";
 
 export default function Page() {
   return <PortfolioDashboard />;
 }
 
-function PreviewButton() {
+function PreviewButton({ className = "" }: { className?: string }) {
   const router = useRouter();
 
   return (
     <Button
       variant="outline"
-      className="w-full justify-start"
       size="sm"
+      className={`justify-start ${className}`}
       onClick={() => router.push("/preview")}
     >
       <Eye className="w-4 h-4 mr-2" />
@@ -48,43 +48,52 @@ function PreviewButton() {
 }
 
 
-
 const navigationItems = [
   {
-    id: 'about' as const,
-    title: 'About Me',
+    id: "about" as const,
+    title: "About Me",
     icon: User,
-    description: 'Personal information and skills'
+    description: "Personal information and skills",
   },
   {
-    id: 'work' as const,
-    title: 'Work Experience',
+    id: "work" as const,
+    title: "Work Experience",
     icon: Briefcase,
-    description: 'Professional experience'
+    description: "Professional experience",
   },
   {
-    id: 'education' as const,
-    title: 'Education & Certifications',
+    id: "education" as const,
+    title: "Education & Certifications",
     icon: GraduationCap,
-    description: 'Educational background'
+    description: "Educational background",
   },
   {
-    id: 'projects' as const,
-    title: 'Featured Projects',
+    id: "projects" as const,
+    title: "Featured Projects",
     icon: FolderOpen,
-    description: 'Showcase your work'
-  }
+    description: "Showcase your work",
+  },
 ];
 
-function PortfolioSidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) {
+function PortfolioSidebar({
+  collapsed,
+  onToggle,
+}: {
+  collapsed: boolean;
+  onToggle: () => void;
+}) {
   const { state, dispatch } = usePortfolio();
 
-  const handleSectionChange = (sectionId: typeof navigationItems[0]['id']) => {
-    dispatch({ type: 'SET_CURRENT_SECTION', payload: sectionId });
+  const handleSectionChange = (
+    sectionId: (typeof navigationItems)[0]["id"],
+  ) => {
+    dispatch({ type: "SET_CURRENT_SECTION", payload: sectionId });
   };
 
   return (
-    <div className={`${collapsed ? 'w-16' : 'w-80'} transition-all duration-300 bg-card border-r flex flex-col`}>
+    <div
+      className={`${collapsed ? "w-16" : "w-80"} transition-all duration-300 bg-card border-r flex flex-col`}
+    >
       <div className="p-4 space-y-6 flex-1">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -95,17 +104,18 @@ function PortfolioSidebar({ collapsed, onToggle }: { collapsed: boolean; onToggl
               </div>
               <div>
                 <h2 className="font-bold text-lg">Portfolio Maker</h2>
-                <p className="text-sm text-muted-foreground">Create your portfolio</p>
+                <p className="text-sm text-muted-foreground">
+                  Create your portfolio
+                </p>
               </div>
             </div>
           )}
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={onToggle}
-            className="p-2"
-          >
-            {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          <Button variant="ghost" size="sm" onClick={onToggle} className="p-2">
+            {collapsed ? (
+              <ChevronRight className="w-4 h-4" />
+            ) : (
+              <ChevronLeft className="w-4 h-4" />
+            )}
           </Button>
         </div>
 
@@ -116,18 +126,20 @@ function PortfolioSidebar({ collapsed, onToggle }: { collapsed: boolean; onToggl
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = state.currentSection === item.id;
-            
+
             return (
               <div
                 key={item.id}
                 onClick={() => handleSectionChange(item.id)}
-                className={`sidebar-nav-item cursor-pointer flex items-center p-2 rounded-md hover:bg-accent/20 transition-colors ${isActive ? 'bg-accent/30' : ''}`}
+                className={`sidebar-nav-item cursor-pointer flex items-center p-2 rounded-md hover:bg-accent/20 transition-colors ${isActive ? "bg-accent/30" : ""}`}
               >
                 <Icon className="w-5 h-5 flex-shrink-0" />
                 {!collapsed && (
                   <div className="ml-3">
                     <div className="font-medium">{item.title}</div>
-                    <div className="text-xs text-muted-foreground">{item.description}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {item.description}
+                    </div>
                   </div>
                 )}
               </div>
@@ -140,23 +152,22 @@ function PortfolioSidebar({ collapsed, onToggle }: { collapsed: boolean; onToggl
             <Separator />
 
             {/* Theme Toggle */}
-    <ThemeToggle />
-            
-        {/* Action Buttons */}
-       <div className="space-y-3">
+            <ThemeToggle />
 
-<div className="space-y-3">
-  <PreviewButton />
-  <Button
-    className="btn-gradient w-full justify-start"
-    size="sm"
-    onClick={generatePortfolioPDF}
-  >
-    <Download className="w-4 h-4 mr-2" />
-    Generate Portfolio
-  </Button>
-</div>
-</div>
+            {/* Action Buttons */}
+            <div className="space-y-3">
+              <div className="space-y-3">
+                <PreviewButton />
+                <Button
+                  className="btn-gradient w-full justify-start"
+                  size="sm"
+                  onClick={generatePortfolioPDF}
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Generate Portfolio
+                </Button>
+              </div>
+            </div>
           </>
         )}
       </div>
@@ -167,8 +178,10 @@ function PortfolioSidebar({ collapsed, onToggle }: { collapsed: boolean; onToggl
 function MobileSidebar() {
   const { state, dispatch } = usePortfolio();
 
-  const handleSectionChange = (sectionId: typeof navigationItems[0]['id']) => {
-    dispatch({ type: 'SET_CURRENT_SECTION', payload: sectionId });
+  const handleSectionChange = (
+    sectionId: (typeof navigationItems)[0]["id"],
+  ) => {
+    dispatch({ type: "SET_CURRENT_SECTION", payload: sectionId });
   };
 
   return (
@@ -187,7 +200,9 @@ function MobileSidebar() {
             </div>
             <div>
               <h2 className="font-bold text-lg">Portfolio Maker</h2>
-              <p className="text-sm text-muted-foreground">Create your portfolio</p>
+              <p className="text-sm text-muted-foreground">
+                Create your portfolio
+              </p>
             </div>
           </div>
 
@@ -198,17 +213,19 @@ function MobileSidebar() {
             {navigationItems.map((item) => {
               const Icon = item.icon;
               const isActive = state.currentSection === item.id;
-              
+
               return (
                 <div
                   key={item.id}
                   onClick={() => handleSectionChange(item.id)}
-                  className={`sidebar-nav-item cursor-pointer ${isActive ? 'active' : ''}`}
+                  className={`sidebar-nav-item cursor-pointer ${isActive ? "active" : ""}`}
                 >
                   <Icon className="w-5 h-5 flex-shrink-0" />
                   <div className="ml-3">
                     <div className="font-medium">{item.title}</div>
-                    <div className="text-xs text-muted-foreground">{item.description}</div>
+                    <div className="text-xs text-muted-foreground">
+                      {item.description}
+                    </div>
                   </div>
                 </div>
               );
@@ -216,13 +233,16 @@ function MobileSidebar() {
           </div>
 
           <Separator />
-            {/* Theme Toggle */}
-            <ThemeToggle />
-          
-          
+          {/* Theme Toggle */}
+          <ThemeToggle />
+
           {/* Action Buttons */}
           <div className="space-y-3">
-            <Button variant="outline" className="w-full justify-start" size="sm">
+            <Button
+              variant="outline"
+              className="w-full justify-start"
+              size="sm"
+            >
               <Eye className="w-4 h-4 mr-2" />
               Preview Portfolio
             </Button>
@@ -242,13 +262,13 @@ function MainContent() {
 
   const renderCurrentSection = () => {
     switch (state.currentSection) {
-      case 'about':
+      case "about":
         return <AboutMeForm />;
-      case 'work':
+      case "work":
         return <WorkExperienceForm />;
-      case 'education':
+      case "education":
         return <EducationCertificationsForm />;
-      case 'projects':
+      case "projects":
         return <FeaturedProjectsForm />;
       default:
         return <AboutMeForm />;
@@ -256,8 +276,10 @@ function MainContent() {
   };
 
   const getCurrentSectionTitle = () => {
-    const section = navigationItems.find(item => item.id === state.currentSection);
-    return section?.title || 'About Me';
+    const section = navigationItems.find(
+      (item) => item.id === state.currentSection,
+    );
+    return section?.title || "About Me";
   };
 
   return (
@@ -276,26 +298,25 @@ function MainContent() {
               </p>
             </div>
           </div>
-          
+
           {/*Action Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-            <Button variant="outline" size="sm">
-              <Eye className="w-4 h-4 mr-2" />
-              Preview
-            </Button>
-            <Button className="btn-gradient" size="sm">
-              <Download className="w-4 h-4 mr-2" />
-              Generate
-            </Button>
-          </div>
+  <PreviewButton className="w-auto justify-center" />
+  <Button
+    className="btn-gradient"
+    size="sm"
+    onClick={generatePortfolioPDF}
+  >
+    <Download className="w-4 h-4 mr-2" />
+    Generate Portfolio
+  </Button>
+</div>
         </div>
       </header>
 
       {/* Main Content Area */}
       <main className="flex-1 p-4 lg:p-8">
-        <div className="max-w-4xl mx-auto">
-          {renderCurrentSection()}
-        </div>
+        <div className="max-w-4xl mx-auto">{renderCurrentSection()}</div>
       </main>
 
       {/* Mobile Action Bar */}
@@ -321,9 +342,9 @@ export function PortfolioDashboard() {
   return (
     <div className="min-h-screen w-full flex bg-gradient-to-br from-background to-muted/30">
       <div className="hidden lg:block">
-        <PortfolioSidebar 
-          collapsed={sidebarCollapsed} 
-          onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} 
+        <PortfolioSidebar
+          collapsed={sidebarCollapsed}
+          onToggle={() => setSidebarCollapsed(!sidebarCollapsed)}
         />
       </div>
       <MainContent />

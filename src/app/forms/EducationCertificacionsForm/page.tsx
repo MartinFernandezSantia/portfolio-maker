@@ -1,39 +1,51 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Badge } from '@/components/ui/badge';
-import { Plus, Trash2, GraduationCap, Calendar, School } from 'lucide-react';
-import { usePortfolio, Education } from '@/contexts/PortfolioContext';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Badge } from "@/components/ui/badge";
+import { Plus, Trash2, GraduationCap, Calendar, School } from "lucide-react";
+import { usePortfolio, Education } from "@/contexts/PortfolioContext";
 
 export default function Page() {
   return <EducationCertificationsForm />;
 }
 
 const certificateTypes = {
-  diploma: 'Diploma',
-  course: 'Course',
-  bootcamp: 'Bootcamp',
-  other: 'Other'
+  diploma: "Diploma",
+  course: "Course",
+  bootcamp: "Bootcamp",
+  other: "Other",
 } as const;
 
 export function EducationCertificationsForm() {
   const { state, dispatch } = usePortfolio();
   const { education } = state;
   const [isAdding, setIsAdding] = useState(false);
-  const [newEducation, setNewEducation] = useState<Omit<Education, 'id'>>({
-    title: '',
-    academy: '',
-    startDate: '',
-    endDate: '',
-    certificateType: 'diploma',
-    description: '',
+  const [newEducation, setNewEducation] = useState<Omit<Education, "id">>({
+    title: "",
+    academy: "",
+    startDate: "",
+    endDate: "",
+    certificateType: "diploma",
+    description: "",
   });
 
   const handleAddEducation = () => {
@@ -42,14 +54,14 @@ export function EducationCertificationsForm() {
         ...newEducation,
         id: Date.now().toString(),
       };
-      dispatch({ type: 'ADD_EDUCATION', payload: educationItem });
+      dispatch({ type: "ADD_EDUCATION", payload: educationItem });
       setNewEducation({
-        title: '',
-        academy: '',
-        startDate: '',
-        endDate: '',
-        certificateType: 'diploma',
-        description: '',
+        title: "",
+        academy: "",
+        startDate: "",
+        endDate: "",
+        certificateType: "diploma",
+        description: "",
       });
       setIsAdding(false);
     }
@@ -57,21 +69,25 @@ export function EducationCertificationsForm() {
 
   const handleUpdateEducation = (id: string, field: string, value: string) => {
     dispatch({
-      type: 'UPDATE_EDUCATION',
+      type: "UPDATE_EDUCATION",
       payload: { id, data: { [field]: value } },
     });
   };
 
   const handleDeleteEducation = (id: string) => {
-    dispatch({ type: 'DELETE_EDUCATION', payload: id });
+    dispatch({ type: "DELETE_EDUCATION", payload: id });
   };
 
   const getBadgeVariant = (type: string) => {
     switch (type) {
-      case 'diploma': return 'default';
-      case 'course': return 'secondary';
-      case 'bootcamp': return 'outline';
-      default: return 'secondary';
+      case "diploma":
+        return "default";
+      case "course":
+        return "secondary";
+      case "bootcamp":
+        return "outline";
+      default:
+        return "secondary";
     }
   };
 
@@ -83,7 +99,8 @@ export function EducationCertificationsForm() {
             Education & Certifications
           </CardTitle>
           <CardDescription>
-            Add your educational background, certifications, and professional courses
+            Add your educational background, certifications, and professional
+            courses
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -108,7 +125,12 @@ export function EducationCertificationsForm() {
                     <Input
                       id="new-title"
                       value={newEducation.title}
-                      onChange={(e) => setNewEducation({ ...newEducation, title: e.target.value })}
+                      onChange={(e) =>
+                        setNewEducation({
+                          ...newEducation,
+                          title: e.target.value,
+                        })
+                      }
                       placeholder="Bachelor of Computer Science"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -118,7 +140,12 @@ export function EducationCertificationsForm() {
                     <Input
                       id="new-academy"
                       value={newEducation.academy}
-                      onChange={(e) => setNewEducation({ ...newEducation, academy: e.target.value })}
+                      onChange={(e) =>
+                        setNewEducation({
+                          ...newEducation,
+                          academy: e.target.value,
+                        })
+                      }
                       placeholder="University of Technology"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -130,17 +157,24 @@ export function EducationCertificationsForm() {
                     <Label htmlFor="new-cert-type">Certificate Type</Label>
                     <Select
                       value={newEducation.certificateType}
-                      onValueChange={(value: any) => setNewEducation({ ...newEducation, certificateType: value })}
+                      onValueChange={(value: any) =>
+                        setNewEducation({
+                          ...newEducation,
+                          certificateType: value,
+                        })
+                      }
                     >
                       <SelectTrigger className="transition-all duration-300 focus:shadow-lg">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        {Object.entries(certificateTypes).map(([key, label]) => (
-                          <SelectItem key={key} value={key}>
-                            {label}
-                          </SelectItem>
-                        ))}
+                        {Object.entries(certificateTypes).map(
+                          ([key, label]) => (
+                            <SelectItem key={key} value={key}>
+                              {label}
+                            </SelectItem>
+                          ),
+                        )}
                       </SelectContent>
                     </Select>
                   </div>
@@ -150,7 +184,12 @@ export function EducationCertificationsForm() {
                       id="new-edu-start-date"
                       type="month"
                       value={newEducation.startDate}
-                      onChange={(e) => setNewEducation({ ...newEducation, startDate: e.target.value })}
+                      onChange={(e) =>
+                        setNewEducation({
+                          ...newEducation,
+                          startDate: e.target.value,
+                        })
+                      }
                       className="transition-all duration-300 focus:shadow-lg"
                     />
                   </div>
@@ -160,7 +199,12 @@ export function EducationCertificationsForm() {
                       id="new-edu-end-date"
                       type="month"
                       value={newEducation.endDate}
-                      onChange={(e) => setNewEducation({ ...newEducation, endDate: e.target.value })}
+                      onChange={(e) =>
+                        setNewEducation({
+                          ...newEducation,
+                          endDate: e.target.value,
+                        })
+                      }
                       placeholder="Leave empty if ongoing"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -172,7 +216,12 @@ export function EducationCertificationsForm() {
                   <Textarea
                     id="new-edu-description"
                     value={newEducation.description}
-                    onChange={(e) => setNewEducation({ ...newEducation, description: e.target.value })}
+                    onChange={(e) =>
+                      setNewEducation({
+                        ...newEducation,
+                        description: e.target.value,
+                      })
+                    }
                     placeholder="Describe what you learned, key subjects, achievements, or certifications obtained..."
                     className="min-h-[100px] resize-none transition-all duration-300 focus:shadow-lg"
                   />
@@ -194,8 +243,10 @@ export function EducationCertificationsForm() {
           {education.length > 0 && (
             <div className="space-y-4 mt-6">
               <Separator />
-              <h3 className="text-lg font-semibold">Your Education & Certifications</h3>
-              
+              <h3 className="text-lg font-semibold">
+                Your Education & Certifications
+              </h3>
+
               {education.map((edu: Education) => (
                 <Card key={edu.id} className="border-l-4 border-l-secondary">
                   <CardContent className="pt-6">
@@ -205,7 +256,13 @@ export function EducationCertificationsForm() {
                           <GraduationCap className="w-4 h-4 text-secondary" />
                           <Input
                             value={edu.title}
-                            onChange={(e) => handleUpdateEducation(edu.id, 'title', e.target.value)}
+                            onChange={(e) =>
+                              handleUpdateEducation(
+                                edu.id,
+                                "title",
+                                e.target.value,
+                              )
+                            }
                             className="font-semibold text-lg border-none p-0 h-auto bg-transparent focus-visible:ring-0"
                             placeholder="Title/Degree"
                           />
@@ -214,7 +271,13 @@ export function EducationCertificationsForm() {
                           <School className="w-4 h-4 text-secondary" />
                           <Input
                             value={edu.academy}
-                            onChange={(e) => handleUpdateEducation(edu.id, 'academy', e.target.value)}
+                            onChange={(e) =>
+                              handleUpdateEducation(
+                                edu.id,
+                                "academy",
+                                e.target.value,
+                              )
+                            }
                             className="text-secondary font-medium border-none p-0 h-auto bg-transparent focus-visible:ring-0"
                             placeholder="Institution/Academy"
                           />
@@ -225,20 +288,39 @@ export function EducationCertificationsForm() {
                             <Input
                               type="month"
                               value={edu.startDate}
-                              onChange={(e) => handleUpdateEducation(edu.id, 'startDate', e.target.value)}
+                              onChange={(e) =>
+                                handleUpdateEducation(
+                                  edu.id,
+                                  "startDate",
+                                  e.target.value,
+                                )
+                              }
                               className="text-sm text-muted-foreground border-none p-0 h-auto bg-transparent focus-visible:ring-0 w-auto"
                             />
                             <span className="text-muted-foreground">-</span>
                             <Input
                               type="month"
                               value={edu.endDate}
-                              onChange={(e) => handleUpdateEducation(edu.id, 'endDate', e.target.value)}
+                              onChange={(e) =>
+                                handleUpdateEducation(
+                                  edu.id,
+                                  "endDate",
+                                  e.target.value,
+                                )
+                              }
                               placeholder="Present"
                               className="text-sm text-muted-foreground border-none p-0 h-auto bg-transparent focus-visible:ring-0 w-auto"
                             />
                           </div>
-                          <Badge variant={getBadgeVariant(edu.certificateType)} className="ml-auto">
-                            {certificateTypes[edu.certificateType as keyof typeof certificateTypes]}
+                          <Badge
+                            variant={getBadgeVariant(edu.certificateType)}
+                            className="ml-auto"
+                          >
+                            {
+                              certificateTypes[
+                                edu.certificateType as keyof typeof certificateTypes
+                              ]
+                            }
                           </Badge>
                         </div>
                       </div>
@@ -251,10 +333,16 @@ export function EducationCertificationsForm() {
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
-                    
+
                     <Textarea
                       value={edu.description}
-                      onChange={(e) => handleUpdateEducation(edu.id, 'description', e.target.value)}
+                      onChange={(e) =>
+                        handleUpdateEducation(
+                          edu.id,
+                          "description",
+                          e.target.value,
+                        )
+                      }
                       placeholder="Describe what you learned, key subjects, or achievements..."
                       className="min-h-[80px] resize-none transition-all duration-300 focus:shadow-lg"
                     />

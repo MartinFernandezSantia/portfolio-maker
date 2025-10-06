@@ -1,29 +1,37 @@
 export type NavItem = {
-    name: string;
-    href: string;
-}
+  name: string;
+  href: string;
+};
 
 export type EducationItem = {
-    degree: string;
-    school: string;
-    period: string;
-    grade: string;
-    description: string;
-}
+  degree: string;
+  school: string;
+  period: string;
+  grade: string;
+  description: string;
+};
 
 export type ExperienceItem = {
-    title: string;
-    company: string;
-    location: string;
-    period: string;
-    description: string;
-}
+  title: string;
+  company: string;
+  location: string;
+  period: string;
+  description: string;
+};
 
 export type ProjectItem = {
-    title: string;
-    description: string;
-    image: string;
-    technologies: string[];
-    github: string;
-    live: string;
-}
+  title: string;
+  description: string;
+  image: string;
+  technologies: string[];
+  github?: string;
+  live?: string;
+};
+
+export type CertificationItem = {
+  name: string;
+  issuer?: string;
+  period?: string;
+  description?: string;
+  type?: string;
+};

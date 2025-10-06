@@ -1,14 +1,20 @@
 "use client";
 
-import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Plus, Trash2, Building2, Calendar, MapPin } from 'lucide-react';
-import { usePortfolio, WorkExperience } from '@/contexts/PortfolioContext';
+import React, { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Plus, Trash2, Building2, Calendar, MapPin } from "lucide-react";
+import { usePortfolio, WorkExperience } from "@/contexts/PortfolioContext";
 
 export default function Page() {
   return <WorkExperienceForm />;
@@ -18,13 +24,15 @@ export function WorkExperienceForm() {
   const { state, dispatch } = usePortfolio();
   const { workExperience } = state;
   const [isAdding, setIsAdding] = useState(false);
-  const [newExperience, setNewExperience] = useState<Omit<WorkExperience, 'id'>>({
-    specialty: '',
-    company: '',
-    location: '',
-    description: '',
-    startDate: '',
-    endDate: '',
+  const [newExperience, setNewExperience] = useState<
+    Omit<WorkExperience, "id">
+  >({
+    specialty: "",
+    company: "",
+    location: "",
+    description: "",
+    startDate: "",
+    endDate: "",
   });
 
   const handleAddExperience = () => {
@@ -33,14 +41,14 @@ export function WorkExperienceForm() {
         ...newExperience,
         id: Date.now().toString(),
       };
-      dispatch({ type: 'ADD_WORK_EXPERIENCE', payload: experience });
+      dispatch({ type: "ADD_WORK_EXPERIENCE", payload: experience });
       setNewExperience({
-        specialty: '',
-        company: '',
-        location: '',
-        description: '',
-        startDate: '',
-        endDate: '',
+        specialty: "",
+        company: "",
+        location: "",
+        description: "",
+        startDate: "",
+        endDate: "",
       });
       setIsAdding(false);
     }
@@ -48,20 +56,20 @@ export function WorkExperienceForm() {
 
   const handleUpdateExperience = (id: string, field: string, value: string) => {
     dispatch({
-      type: 'UPDATE_WORK_EXPERIENCE',
+      type: "UPDATE_WORK_EXPERIENCE",
       payload: { id, data: { [field]: value } },
     });
   };
 
   const handleDeleteExperience = (id: string) => {
-    dispatch({ type: 'DELETE_WORK_EXPERIENCE', payload: id });
+    dispatch({ type: "DELETE_WORK_EXPERIENCE", payload: id });
   };
 
   const formatDate = (dateString: string) => {
-    if (!dateString) return '';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short'
+    if (!dateString) return "";
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
     });
   };
 
@@ -98,7 +106,12 @@ export function WorkExperienceForm() {
                     <Input
                       id="new-specialty"
                       value={newExperience.specialty}
-                      onChange={(e) => setNewExperience({ ...newExperience, specialty: e.target.value })}
+                      onChange={(e) =>
+                        setNewExperience({
+                          ...newExperience,
+                          specialty: e.target.value,
+                        })
+                      }
                       placeholder="Frontend Developer"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -108,7 +121,12 @@ export function WorkExperienceForm() {
                     <Input
                       id="new-company"
                       value={newExperience.company}
-                      onChange={(e) => setNewExperience({ ...newExperience, company: e.target.value })}
+                      onChange={(e) =>
+                        setNewExperience({
+                          ...newExperience,
+                          company: e.target.value,
+                        })
+                      }
                       placeholder="Tech Company Inc."
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -121,7 +139,12 @@ export function WorkExperienceForm() {
                     <Input
                       id="new-location"
                       value={newExperience.location}
-                      onChange={(e) => setNewExperience({ ...newExperience, location: e.target.value })}
+                      onChange={(e) =>
+                        setNewExperience({
+                          ...newExperience,
+                          location: e.target.value,
+                        })
+                      }
                       placeholder="San Francisco, CA"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -132,7 +155,12 @@ export function WorkExperienceForm() {
                       id="new-start-date"
                       type="month"
                       value={newExperience.startDate}
-                      onChange={(e) => setNewExperience({ ...newExperience, startDate: e.target.value })}
+                      onChange={(e) =>
+                        setNewExperience({
+                          ...newExperience,
+                          startDate: e.target.value,
+                        })
+                      }
                       className="transition-all duration-300 focus:shadow-lg"
                     />
                   </div>
@@ -142,7 +170,12 @@ export function WorkExperienceForm() {
                       id="new-end-date"
                       type="month"
                       value={newExperience.endDate}
-                      onChange={(e) => setNewExperience({ ...newExperience, endDate: e.target.value })}
+                      onChange={(e) =>
+                        setNewExperience({
+                          ...newExperience,
+                          endDate: e.target.value,
+                        })
+                      }
                       placeholder="Leave empty if current"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -154,14 +187,22 @@ export function WorkExperienceForm() {
                   <Textarea
                     id="new-description"
                     value={newExperience.description}
-                    onChange={(e) => setNewExperience({ ...newExperience, description: e.target.value })}
+                    onChange={(e) =>
+                      setNewExperience({
+                        ...newExperience,
+                        description: e.target.value,
+                      })
+                    }
                     placeholder="Describe your responsibilities, achievements, and key contributions..."
                     className="min-h-[100px] resize-none transition-all duration-300 focus:shadow-lg"
                   />
                 </div>
 
                 <div className="flex space-x-3">
-                  <Button onClick={handleAddExperience} className="btn-gradient">
+                  <Button
+                    onClick={handleAddExperience}
+                    className="btn-gradient"
+                  >
                     Add Experience
                   </Button>
                   <Button variant="outline" onClick={() => setIsAdding(false)}>
@@ -177,7 +218,7 @@ export function WorkExperienceForm() {
             <div className="space-y-4 mt-6">
               <Separator />
               <h3 className="text-lg font-semibold">Your Work Experience</h3>
-              
+
               {workExperience.map((exp: WorkExperience, index: number) => (
                 <Card key={exp.id} className="border-l-4 border-l-primary">
                   <CardContent className="pt-6">
@@ -187,14 +228,26 @@ export function WorkExperienceForm() {
                           <Building2 className="w-4 h-4 text-primary" />
                           <Input
                             value={exp.specialty}
-                            onChange={(e) => handleUpdateExperience(exp.id, 'specialty', e.target.value)}
+                            onChange={(e) =>
+                              handleUpdateExperience(
+                                exp.id,
+                                "specialty",
+                                e.target.value,
+                              )
+                            }
                             className="font-semibold text-lg border-none p-0 h-auto bg-transparent focus-visible:ring-0"
                             placeholder="Position/Specialty"
                           />
                         </div>
                         <Input
                           value={exp.company}
-                          onChange={(e) => handleUpdateExperience(exp.id, 'company', e.target.value)}
+                          onChange={(e) =>
+                            handleUpdateExperience(
+                              exp.id,
+                              "company",
+                              e.target.value,
+                            )
+                          }
                           className="text-primary font-medium border-none p-0 h-auto bg-transparent focus-visible:ring-0 mb-2"
                           placeholder="Company Name"
                         />
@@ -203,7 +256,13 @@ export function WorkExperienceForm() {
                             <MapPin className="w-3 h-3 text-muted-foreground" />
                             <Input
                               value={exp.location}
-                              onChange={(e) => handleUpdateExperience(exp.id, 'location', e.target.value)}
+                              onChange={(e) =>
+                                handleUpdateExperience(
+                                  exp.id,
+                                  "location",
+                                  e.target.value,
+                                )
+                              }
                               className="text-sm text-muted-foreground border-none p-0 h-auto bg-transparent focus-visible:ring-0"
                               placeholder="Location"
                             />
@@ -215,14 +274,26 @@ export function WorkExperienceForm() {
                             <Input
                               type="month"
                               value={exp.startDate}
-                              onChange={(e) => handleUpdateExperience(exp.id, 'startDate', e.target.value)}
+                              onChange={(e) =>
+                                handleUpdateExperience(
+                                  exp.id,
+                                  "startDate",
+                                  e.target.value,
+                                )
+                              }
                               className="text-sm text-muted-foreground border-none p-0 h-auto bg-transparent focus-visible:ring-0 w-auto"
                             />
                             <span className="text-muted-foreground">-</span>
                             <Input
                               type="month"
                               value={exp.endDate}
-                              onChange={(e) => handleUpdateExperience(exp.id, 'endDate', e.target.value)}
+                              onChange={(e) =>
+                                handleUpdateExperience(
+                                  exp.id,
+                                  "endDate",
+                                  e.target.value,
+                                )
+                              }
                               placeholder="Present"
                               className="text-sm text-muted-foreground border-none p-0 h-auto bg-transparent focus-visible:ring-0 w-auto"
                             />
@@ -238,10 +309,16 @@ export function WorkExperienceForm() {
                         <Trash2 className="w-4 h-4" />
                       </Button>
                     </div>
-                    
+
                     <Textarea
                       value={exp.description}
-                      onChange={(e) => handleUpdateExperience(exp.id, 'description', e.target.value)}
+                      onChange={(e) =>
+                        handleUpdateExperience(
+                          exp.id,
+                          "description",
+                          e.target.value,
+                        )
+                      }
                       placeholder="Describe your responsibilities and achievements..."
                       className="min-h-[80px] resize-none transition-all duration-300 focus:shadow-lg"
                     />

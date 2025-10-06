@@ -4,7 +4,7 @@ import "./globals.css";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/components/theme-provider";
-import { PortfolioProvider } from "@/contexts/PortfolioContext"; 
+import { PortfolioProvider } from "@/contexts/PortfolioContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +24,7 @@ export default function RootLayout({
         <ThemeProvider defaultTheme="system" enableSystem attribute="class">
           <TooltipProvider>
             <Toaster />
-            <PortfolioProvider> 
-              {children}
-            </PortfolioProvider>
+            <PortfolioProvider>{children}</PortfolioProvider>
           </TooltipProvider>
         </ThemeProvider>
       </body>

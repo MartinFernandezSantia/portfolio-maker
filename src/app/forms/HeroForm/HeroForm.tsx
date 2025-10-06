@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { usePortfolioStore } from "@/store/usePortafolioStore"
+import { usePortfolioStore } from "@/store/usePortafolioStore";
 
 export default function HeroForm() {
-  const hero = usePortfolioStore((state) => state.hero)
-  const setHero = usePortfolioStore((state) => state.setHero)
+  const hero = usePortfolioStore((state) => state.hero);
+  const setHero = usePortfolioStore((state) => state.setHero);
 
   return (
     <div className="space-y-4">
@@ -43,5 +43,5 @@ export default function HeroForm() {
         />
       </div>
     </div>
-  )
+  );
 }

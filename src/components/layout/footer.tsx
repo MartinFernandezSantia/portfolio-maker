@@ -2,7 +2,6 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Heart } from "lucide-react";
 
-
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -23,7 +22,9 @@ const Footer = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-xl font-bold gradient-text mb-2">Alex Johnson</h3>
+            <h3 className="text-xl font-bold gradient-text mb-2">
+              Alex Johnson
+            </h3>
             <p className="text-muted-foreground text-sm">
               Full Stack Developer crafting digital experiences
             </p>

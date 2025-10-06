@@ -15,10 +15,12 @@ const Contact = () => {
     message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
@@ -63,8 +65,8 @@ const Contact = () => {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or just want to chat? I&apos;d love to hear from you.
-            Let&apos;s create something amazing together.
+            Have a project in mind or just want to chat? I&apos;d love to hear
+            from you. Let&apos;s create something amazing together.
           </p>
         </motion.div>
 
@@ -80,7 +82,10 @@ const Contact = () => {
               <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Name
                   </label>
                   <Input
@@ -95,7 +100,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Email
                   </label>
                   <Input
@@ -111,7 +119,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Message
                   </label>
                   <Textarea
@@ -126,7 +137,12 @@ const Contact = () => {
                   />
                 </div>
 
-                <HeroButton type="submit" variant="hero" size="lg" className="w-full group">
+                <HeroButton
+                  type="submit"
+                  variant="hero"
+                  size="lg"
+                  className="w-full group"
+                >
                   <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-smooth" />
                   Send Message
                 </HeroButton>
@@ -143,10 +159,13 @@ const Contact = () => {
             className="space-y-6"
           >
             <div>
-              <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-semibold mb-6">
+                Contact Information
+              </h3>
               <p className="text-muted-foreground mb-8">
-                I&apos;m always open to discussing new opportunities, interesting projects,
-                or just having a conversation about technology and development.
+                I&apos;m always open to discussing new opportunities,
+                interesting projects, or just having a conversation about
+                technology and development.
               </p>
             </div>
 
@@ -182,9 +201,7 @@ const Contact = () => {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-            >
-
-            </motion.div>
+            ></motion.div>
           </motion.div>
         </div>
       </div>

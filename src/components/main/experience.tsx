@@ -14,7 +14,12 @@ const Experience = () => {
     company: exp.company,
     location: exp.location,
     period: `${exp.startDate ? new Date(exp.startDate).toLocaleDateString("en-US", { year: "numeric", month: "short" }) : ""} - ${
-      exp.endDate ? new Date(exp.endDate).toLocaleDateString("en-US", { year: "numeric", month: "short" }) : "Present"
+      exp.endDate
+        ? new Date(exp.endDate).toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "short",
+          })
+        : "Present"
     }`,
     description: exp.description,
   }));

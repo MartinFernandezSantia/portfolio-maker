@@ -1,72 +1,38 @@
-import placeholder from "@/public/placeholder.svg";
-import H2 from "../h2";
-import { ProjectItem } from "@/lib/types";
-import ProjectsCarousel from "../projects-carousel";
+"use client";
 
-const projects: ProjectItem[] = [
-  {
-    title: "E-Commerce Platform",
-    description: "A full-stack e-commerce solution with React, Node.js, and Stripe integration. Features include user authentication, product management, and real-time inventory tracking.",
-    image: placeholder,
-    technologies: ["React", "Node.js", "MongoDB", "Stripe", "TailwindCSS"],
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Task Management App",
-    description: "A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features built with modern web technologies.",
-    image: placeholder,
-    technologies: ["React", "TypeScript", "Socket.io", "PostgreSQL", "Framer Motion"],
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Weather Dashboard",
-    description: "A beautiful weather dashboard with location-based forecasts, interactive charts, and responsive design. Integrates with multiple weather APIs for accurate data.",
-    image: placeholder,
-    technologies: ["React", "TypeScript", "Chart.js", "Weather API", "TailwindCSS"],
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Portfolio Website",
-    description: "A personal portfolio website to showcase projects, skills, and experience.",
-    image: placeholder,
-    technologies: ["Next.js", "TypeScript", "Framer Motion", "TailwindCSS"],
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Blog Platform",
-    description: "A modern blog platform with markdown support, user authentication, and SEO optimization.",
-    image: placeholder,
-    technologies: ["Next.js", "TypeScript", "Prisma", "TailwindCSS"],
-    github: "#",
-    live: "#",
-  },
-  {
-    title: "Chat Application",
-    description: "A real-time chat application with user authentication, private messaging, and group chats.",
-    image: placeholder,
-    technologies: ["Next.js", "TypeScript", "Socket.io", "TailwindCSS"],
-    github: "#",
-    live: "#",
-  },
-];
+import H2 from "../h2";
+import ProjectsCarousel from "../projects-carousel";
+import { usePortfolio } from "@/contexts/PortfolioContext";
 
 const Projects = () => {
+  const { state } = usePortfolio();
+  const { projects } = state;
 
   return (
     <section id="projects" className="py-20 relative">
       <div className="container mx-auto">
-        <H2
-          subtitle="Here are some of my recent projects that showcase my skills and passion for creating
-            innovative web solutions."
-        >
+        <H2 subtitle="Here are some of my recent projects that showcase my skills and passion for creating innovative web solutions.">
           Featured <span className="gradient-text">Projects</span>
         </H2>
 
-        <ProjectsCarousel projects={projects} />
+        {projects.length > 0 ? (
+          <ProjectsCarousel
+            projects={projects.map((p) => ({
+              title: p.projectName,
+              description: p.description,
+              image: p.projectImages[0]
+                ? URL.createObjectURL(p.projectImages[0]) // si son File[]
+                : "/placeholder.svg",
+              technologies: p.technologiesUsed,
+              github: p.githubLink,
+              live: p.liveDemoLink,
+            }))}
+          />
+        ) : (
+          <p className="text-center text-muted-foreground mt-6">
+            No featured projects yet. Add some in the dashboard.
+          </p>
+        )}
       </div>
     </section>
   );
