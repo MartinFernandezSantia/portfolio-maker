@@ -57,10 +57,12 @@ function ExperienceItem({ exp, index }: ExperienceItemProps) {
             {company}
           </div>
 
-          <div className="flex items-center text-sm text-muted-foreground mb-4">
-            <MapPin className="w-4 h-4 mr-1" />
-            {location}
-          </div>
+          {location.trim() && (
+            <div className="flex items-center text-sm text-muted-foreground mb-4">
+              <MapPin className="w-4 h-4 mr-1" />
+              {location}
+            </div>
+          )}
 
           <p className="text-muted-foreground leading-relaxed">{description}</p>
         </div>

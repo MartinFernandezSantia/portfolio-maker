@@ -1,13 +1,17 @@
 "use client";
 
+import { usePortfolio } from "@/contexts/PortfolioContext";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail } from "lucide-react";
 
 export default function Socials() {
+  const { state } = usePortfolio();
+  const { aboutMe } = state;
+
   const socialItems = [
-    { Icon: Github, href: "#", label: "GitHub" },
-    { Icon: Linkedin, href: "#", label: "LinkedIn" },
-    { Icon: Mail, href: "#", label: "Email" },
+    { Icon: Github, href: aboutMe.githubLink, label: "GitHub" },
+    { Icon: Linkedin, href: aboutMe.linkedinLink, label: "LinkedIn" },
+    { Icon: Mail, href: `mailto:${aboutMe.email}`, label: "Email" },
   ];
 
   return (
@@ -21,6 +25,7 @@ export default function Socials() {
         <motion.a
           key={label}
           href={href}
+          target="_blank"
           className="p-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth glow"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}

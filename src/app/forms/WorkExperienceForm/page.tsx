@@ -36,7 +36,7 @@ export function WorkExperienceForm() {
   });
 
   const handleAddExperience = () => {
-    if (newExperience.specialty && newExperience.company) {
+    if (newExperience.specialty && newExperience.company && newExperience.startDate) {
       const experience: WorkExperience = {
         ...newExperience,
         id: Date.now().toString(),
@@ -150,7 +150,7 @@ export function WorkExperienceForm() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="new-start-date">Start Date</Label>
+                    <Label htmlFor="new-start-date">Start Date *</Label>
                     <Input
                       id="new-start-date"
                       type="month"

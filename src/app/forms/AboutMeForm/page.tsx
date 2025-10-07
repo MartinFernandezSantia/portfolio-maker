@@ -21,7 +21,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Camera, X, Plus } from "lucide-react";
+import { Camera, X } from "lucide-react";
 import { usePortfolio } from "@/contexts/PortfolioContext";
 
 export default function Page() {
@@ -127,7 +127,7 @@ export function AboutMeForm() {
             About Me
           </CardTitle>
           <CardDescription>
-            Let's start with your basic information and professional profile
+            Let&apos;s start with your basic information and professional profile
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -177,6 +177,20 @@ export function AboutMeForm() {
                 className="transition-all duration-300 focus:shadow-lg"
               />
             </div>
+            <div className="space-y-2">
+              <Label htmlFor="jobTitle">Job Title *</Label>
+              <Input
+                id="jobTitle"
+                value={aboutMe.jobTitle}
+                onChange={(e) => handleInputChange("jobTitle", e.target.value)}
+                placeholder="Full Stack Developer"
+                className="transition-all duration-300 focus:shadow-lg"
+              />
+            </div>
+          </div>
+
+          {/* Contact Information */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email *</Label>
               <Input
@@ -231,7 +245,7 @@ export function AboutMeForm() {
           </div>
 
           {/* Features */}
-          <div className="space-y-4">
+          {/* <div className="space-y-4">
             <Label>Features</Label>
 
             {aboutMe.features?.map((feature, index) => (
@@ -297,7 +311,7 @@ export function AboutMeForm() {
             >
               <Plus className="w-4 h-4" /> Agregar Feature
             </Button>
-          </div>
+          </div> */}
 
           {/* Tech Stack */}
           <div className="space-y-4">

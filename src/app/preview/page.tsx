@@ -19,7 +19,8 @@ export default function PreviewPage({ state }: { state: PortfolioState }) {
       <div id="portfolio-content">
         <Background />
         <Navigation />
-        <main className="my-5 px-6">
+        <main className="px-6">
+          <Hero />
           <About />
           <Experience />
           <Education />

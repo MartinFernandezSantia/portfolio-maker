@@ -28,9 +28,9 @@ export default function DesktopNav({ onClick, navItems }: DesktopNavProps) {
           {item.name}
         </MotionLink>
       ))}
-      <HeroButton variant="hero" size="sm">
+      {/* <HeroButton variant="hero" size="sm">
         Hire Me
-      </HeroButton>
+      </HeroButton> */}
     </>
   );
 }

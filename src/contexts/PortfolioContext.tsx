@@ -17,6 +17,7 @@ export interface Feature {
 export interface AboutMe {
   profilePhoto?: File | null;
   fullName: string;
+  jobTitle: string;
   githubLink: string;
   linkedinLink: string;
   email: string;
@@ -74,6 +75,7 @@ const initialState: PortfolioState = {
   aboutMe: {
     profilePhoto: null,
     fullName: "",
+    jobTitle: "",
     githubLink: "",
     linkedinLink: "",
     email: "",
@@ -93,15 +95,15 @@ type PortfolioAction =
   | { type: "UPDATE_ABOUT_ME"; payload: Partial<AboutMe> }
   | { type: "ADD_WORK_EXPERIENCE"; payload: WorkExperience }
   | {
-      type: "UPDATE_WORK_EXPERIENCE";
-      payload: { id: string; data: Partial<WorkExperience> };
-    }
+    type: "UPDATE_WORK_EXPERIENCE";
+    payload: { id: string; data: Partial<WorkExperience> };
+  }
   | { type: "DELETE_WORK_EXPERIENCE"; payload: string }
   | { type: "ADD_EDUCATION"; payload: Education }
   | {
-      type: "UPDATE_EDUCATION";
-      payload: { id: string; data: Partial<Education> };
-    }
+    type: "UPDATE_EDUCATION";
+    payload: { id: string; data: Partial<Education> };
+  }
   | { type: "DELETE_EDUCATION"; payload: string }
   | { type: "ADD_PROJECT"; payload: Project }
   | { type: "UPDATE_PROJECT"; payload: { id: string; data: Partial<Project> } }

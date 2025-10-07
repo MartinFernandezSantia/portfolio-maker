@@ -8,19 +8,22 @@ const Experience = () => {
   const { state } = usePortfolio();
   const { workExperience } = state;
 
+  console.log("Work Experience:", workExperience);
   // Mapear tus WorkExperience del contexto al formato esperado por ExperienceTimeline
+
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString + 'T00:00:00');
+    const month = date.toLocaleDateString("en-US", { month: "short" });
+    const year = date.getFullYear();
+    console.log("Formatted Date:", date, "\n Previous Date", dateString);
+    return `${month} ${year}`;
+  };
+
   const experiences = workExperience.map((exp) => ({
     title: exp.specialty,
     company: exp.company,
     location: exp.location,
-    period: `${exp.startDate ? new Date(exp.startDate).toLocaleDateString("en-US", { year: "numeric", month: "short" }) : ""} - ${
-      exp.endDate
-        ? new Date(exp.endDate).toLocaleDateString("en-US", {
-            year: "numeric",
-            month: "short",
-          })
-        : "Present"
-    }`,
+    period: `${exp.startDate ? formatDate(exp.startDate) : ""} - ${exp.endDate ? formatDate(exp.endDate) : "Present"}`,
     description: exp.description,
   }));
 

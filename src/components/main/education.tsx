@@ -48,7 +48,10 @@ const Education = () => {
 
         <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
           <EducationList education={formalEducation} />
-          <CertificationList certifications={certifications} />
+
+          {certifications.length > 0 && (
+            <CertificationList certifications={certifications} />
+          )}
         </div>
       </div>
     </section>

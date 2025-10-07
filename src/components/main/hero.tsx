@@ -10,7 +10,7 @@ import { usePortfolio } from "@/contexts/PortfolioContext";
 
 const Hero = () => {
   const { state } = usePortfolio();
-  const { hero } = state;
+  const { aboutMe } = state;
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -21,11 +21,14 @@ const Hero = () => {
           <H1>
             Hi, I&apos;m{" "}
             <span className="gradient-text">
-              {hero.firstName} {hero.lastName}
+              {aboutMe.fullName}
             </span>
           </H1>
 
-          <Subtitle size="lg">{hero.headline}</Subtitle>
+          <Subtitle size="lg">
+            {aboutMe.jobTitle} crafting beautiful, functional experiences
+            with modern technologies and clean code.
+          </Subtitle>
 
           <CTA />
           <Socials />

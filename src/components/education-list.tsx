@@ -4,6 +4,7 @@ import { EducationItem } from "@/lib/types";
 import { Card } from "./ui/card";
 import { GraduationCap, Award, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
 
 export default function EducationList({
   education,
@@ -11,11 +12,33 @@ export default function EducationList({
   education: EducationItem[];
 }) {
   return (
-    <div className="space-y-6">
-      {education.map((edu, index) => (
-        <EducationCard key={index} edu={edu} index={index} />
-      ))}
-    </div>
+    <Carousel orientation="vertical" opts={{
+      startIndex: 0,
+      loop: false,
+      breakpoints: {
+        "(min-width: 768px)": { slidesToScroll: 2 },
+        "(min-width: 1024px)": {
+          slidesToScroll: 3,
+          active: education.length > 3,
+          watchDrag: false,
+        },
+      },
+      // slidesToScroll: 3,
+      // slideSize: '100%'
+    }}>
+      <CarouselContent className="max-h-100 md:max-h-130">
+        {education.map((edu, index) => (
+          <CarouselItem key={index}>
+            <EducationCard key={index} edu={edu} index={index} />
+          </CarouselItem>
+        ))}
+      </CarouselContent>
+      <CarouselPrevious className="hidden md:block" />
+      <CarouselNext className="hidden md:block" />
+    </Carousel>
+    // <div className="space-y-6 max-h-120 overflow-y-auto">
+
+    // </div>
   );
 }
 

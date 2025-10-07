@@ -5,6 +5,7 @@ import { HeroButton } from "@/components/ui/button-variants";
 import { scrollToSection } from "@/lib/utils";
 
 export default function CTA() {
+
   return (
     <motion.div
       initial={{ y: 30, opacity: 0 }}

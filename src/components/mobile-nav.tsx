@@ -37,16 +37,15 @@ export default function MobileNav({
               onClick();
             }}
             className="block text-foreground hover:text-primary transition-smooth"
-            whileHover={{ x: 5 }}
           >
             {item.name}
           </MotionLink>
         ))}
-        <div className="pt-2">
+        {/* <div className="pt-2">
           <HeroButton variant="hero" size="sm" className="w-full">
             Hire Me
           </HeroButton>
-        </div>
+        </div> */}
       </div>
     </motion.div>
   );
