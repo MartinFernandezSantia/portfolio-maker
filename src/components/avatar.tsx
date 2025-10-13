@@ -5,7 +5,7 @@ import Image from "next/image";
 import placeholder from "@/public/placeholder.svg";
 import { usePortfolio } from "@/contexts/PortfolioContext";
 
-export default function Avatar() {
+export default function Avatar({ className = "" }: { className?: string }) {
   const { state } = usePortfolio();
   const { aboutMe } = state;
 
@@ -21,7 +21,7 @@ export default function Avatar() {
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="mb-8 mt-8 sm:mt-0"
+      className={`mb-8 ${className}`}
     >
       <Image
         src={getProfilePhotoUrl() || placeholder}
