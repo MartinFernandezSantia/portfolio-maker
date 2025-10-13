@@ -6,13 +6,14 @@ import { ChevronDown } from "lucide-react";
 
 type ScrollDownProps = {
   scrollTo: string;
+  className?: string;
 };
 
-export default function ScrollDown({ scrollTo }: ScrollDownProps) {
+export default function ScrollDown({ scrollTo, className = "" }: ScrollDownProps) {
   return (
     <motion.button
       onClick={() => scrollToSection(scrollTo)}
-      className="absolute bottom-20 left-1/2 transform -translate-x-1/2 text-primary"
+      className={`text-primary ${className}`}
       animate={{ y: [0, 10, 0] }}
       transition={{ duration: 1.5, repeat: Infinity }}
       aria-label="Scroll to about section"
