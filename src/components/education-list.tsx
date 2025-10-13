@@ -33,8 +33,12 @@ export default function EducationList({
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hidden md:block" />
-      <CarouselNext className="hidden md:block" />
+      {education.length > 3 && (
+        <>
+          <CarouselPrevious className="hidden md:flex" />
+          <CarouselNext className="hidden md:flex" />
+        </>
+      )}
     </Carousel>
     // <div className="space-y-6 max-h-120 overflow-y-auto">
 

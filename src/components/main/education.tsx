@@ -6,11 +6,12 @@ import EducationList from "../education-list";
 import CertificationList from "../certification-list";
 import { usePortfolio } from "@/contexts/PortfolioContext";
 import { EducationItem, CertificationItem } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 const Education = () => {
   const { state } = usePortfolio();
   const { education } = state;
-  
+
   const sortedEducation = [...education].sort((a, b) => {
     const dateA = a.endDate || a.startDate;
     const dateB = b.endDate || b.startDate;
@@ -52,8 +53,14 @@ const Education = () => {
           Education & <span className="gradient-text">Certifications</span>
         </H2>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          <EducationList education={formalEducation} />
+        <div className={cn(" max-w-6xl mx-auto", {
+          "grid lg:grid-cols-2 gap-8": formalEducation.length > 0 && certifications.length > 0,
+          "flex items-center justify-center": formalEducation.length <= 0 || certifications.length <= 0
+        }
+        )}>
+          {formalEducation.length > 0 && (
+            <EducationList education={formalEducation} />
+          )}
 
           {certifications.length > 0 && (
             <CertificationList certifications={certifications} />
