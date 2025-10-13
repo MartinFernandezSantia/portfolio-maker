@@ -205,6 +205,7 @@ export function EducationCertificationsForm() {
                           endDate: e.target.value,
                         })
                       }
+                       min={newEducation.startDate} // <-- Solo permite fechas iguales o posteriores al startDate
                       placeholder="Leave empty if ongoing"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -308,6 +309,7 @@ export function EducationCertificationsForm() {
                                   e.target.value,
                                 )
                               }
+                              min={edu.startDate} // <-- Solo permite fechas iguales o posteriores al startDate
                               placeholder="Present"
                               className="text-sm text-muted-foreground border-none p-0 h-auto bg-transparent focus-visible:ring-0 w-auto"
                             />

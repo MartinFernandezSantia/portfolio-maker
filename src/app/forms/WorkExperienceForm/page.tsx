@@ -176,8 +176,9 @@ export function WorkExperienceForm() {
                           endDate: e.target.value,
                         })
                       }
-                      placeholder="Leave empty if current"
-                      className="transition-all duration-300 focus:shadow-lg"
+                       min={newExperience.startDate} 
+                        placeholder="Leave empty if current"
+                        className="transition-all duration-300 focus:shadow-lg"
                     />
                   </div>
                 </div>
