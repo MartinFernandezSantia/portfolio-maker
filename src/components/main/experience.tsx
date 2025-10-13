@@ -19,7 +19,13 @@ const Experience = () => {
     return `${month} ${year}`;
   };
 
-  const experiences = workExperience.map((exp) => ({
+   const sortedWorkExperience = [...workExperience].sort((a, b) => {
+    const dateA = a.endDate || a.startDate;
+    const dateB = b.endDate || b.startDate;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
+
+  const experiences = sortedWorkExperience.map((exp) => ({
     title: exp.specialty,
     company: exp.company,
     location: exp.location,

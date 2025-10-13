@@ -78,7 +78,7 @@ const Footer = () => {
           className="border-t border-border mt-8 pt-8 text-center"
         >
           <p className="text-sm text-muted-foreground flex flex-col md:flex-row items-center md:justify-center gap-2">
-            © {currentYear} Alex Johnson. Made with
+            © {currentYear} {aboutMe.fullName}. Made with
             <motion.span
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}

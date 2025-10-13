@@ -10,9 +10,15 @@ import { EducationItem, CertificationItem } from "@/lib/types";
 const Education = () => {
   const { state } = usePortfolio();
   const { education } = state;
+  
+  const sortedEducation = [...education].sort((a, b) => {
+    const dateA = a.endDate || a.startDate;
+    const dateB = b.endDate || b.startDate;
+    return new Date(dateB).getTime() - new Date(dateA).getTime();
+  });
 
   // 🎓 Educación formal (Diplomas, Bootcamps, etc.)
-  const formalEducation: EducationItem[] = education
+  const formalEducation: EducationItem[] = sortedEducation
     .filter(
       (edu) =>
         edu.certificateType === "diploma" || edu.certificateType === "bootcamp",
@@ -21,12 +27,12 @@ const Education = () => {
       degree: edu.title,
       school: edu.academy,
       period: `${edu.startDate} - ${edu.endDate || "Present"}`,
-      grade: edu.certificateType, // muestra "diploma" o "bootcamp"
+      grade: edu.certificateType,
       description: edu.description,
     }));
 
   // 🏅 Certificaciones, cursos y otros
-  const certifications: CertificationItem[] = education
+  const certifications: CertificationItem[] = sortedEducation
     .filter(
       (edu) =>
         edu.certificateType === "course" || edu.certificateType === "other",
@@ -35,7 +41,7 @@ const Education = () => {
       name: edu.title,
       issuer: edu.academy,
       period: `${edu.startDate} - ${edu.endDate || "Present"}`,
-      type: edu.certificateType, // muestra "course" o "other"
+      type: edu.certificateType,
       description: edu.description,
     }));
 
