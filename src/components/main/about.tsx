@@ -1,37 +1,17 @@
 "use client";
 
-import { Code2, Lightbulb, Users, Zap } from "lucide-react";
 import { motion } from "framer-motion";
 import { Card } from "../ui/card";
-
+import { usePortfolio } from "@/contexts/PortfolioContext";
+import { Github, Linkedin } from "lucide-react";
 
 const About = () => {
-  const features = [
-    {
-      icon: Code2,
-      title: "Clean Code",
-      description: "Writing maintainable, scalable code that stands the test of time.",
-    },
-    {
-      icon: Lightbulb,
-      title: "Innovation",
-      description: "Always exploring new technologies and creative solutions.",
-    },
-    {
-      icon: Users,
-      title: "Collaboration",
-      description: "Working effectively with teams to deliver exceptional results.",
-    },
-    {
-      icon: Zap,
-      title: "Performance",
-      description: "Optimizing applications for speed and user experience.",
-    },
-  ];
+  const { state } = usePortfolio();
+  const { aboutMe } = state;
 
   return (
     <section id="about" className="py-20 relative">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -42,14 +22,12 @@ const About = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             About <span className="gradient-text">Me</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            I&apos;m a passionate full-stack developer with over 5 years of experience creating
-            digital solutions that make a difference. I specialize in React, Node.js, and
-            modern web technologies, always focusing on clean code and user experience.
+          <p className="text-lg text-muted-foreground max-w-5xl mx-auto text-justify">
+            {aboutMe.aboutMe}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
@@ -75,7 +53,7 @@ const About = () => {
               </Card>
             </motion.div>
           ))}
-        </div>
+        </div> */}
 
         {/* Skills section */}
         <motion.div
@@ -89,26 +67,25 @@ const About = () => {
             <span className="gradient-text">Tech Stack</span>
           </h3>
           <div className="flex flex-wrap justify-center gap-4">
-            {[
-              "React", "TypeScript", "Node.js", "Next.js", "TailwindCSS",
-              "PostgreSQL", "MongoDB", "AWS", "Docker", "GraphQL"
-            ].map((tech, index) => (
-              <motion.span
+            {aboutMe.techStack.map((tech, index) => (
+              <motion.div
                 key={tech}
                 initial={{ scale: 0 }}
                 whileInView={{ scale: 1 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="px-4 py-2 bg-secondary rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-smooth cursor-default"
+                className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-smooth cursor-default group"
               >
-                {tech}
-              </motion.span>
+                {/* <tech.icon className="w-4 h-4 group-hover:scale-110 transition-transform" /> */}
+                <span>{tech}</span>
+              </motion.div>
             ))}
           </div>
         </motion.div>
       </div>
     </section>
   );
+
 };
 
 export default About;

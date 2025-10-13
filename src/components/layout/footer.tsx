@@ -1,14 +1,16 @@
 "use client";
+import { usePortfolio } from "@/contexts/PortfolioContext";
 import { motion } from "framer-motion";
 import { Github, Linkedin, Mail, Heart } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { state: { aboutMe } } = usePortfolio();
 
   const socialLinks = [
-    { Icon: Github, href: "#", label: "GitHub" },
-    { Icon: Linkedin, href: "#", label: "LinkedIn" },
-    { Icon: Mail, href: "mailto:alex@example.com", label: "Email" },
+    { Icon: Github, href: aboutMe.githubLink, label: "GitHub" },
+    { Icon: Linkedin, href: aboutMe.linkedinLink, label: "LinkedIn" },
+    { Icon: Mail, href: `mailto:${aboutMe.email}`, label: "Email" },
   ];
 
   return (
@@ -23,9 +25,11 @@ const Footer = () => {
             viewport={{ once: true }}
             className="text-center md:text-start"
           >
-            <h3 className="text-xl font-bold gradient-text mb-2">Alex Johnson</h3>
+            <h3 className="text-xl font-bold gradient-text mb-2">
+              {aboutMe.fullName}
+            </h3>
             <p className="text-muted-foreground text-sm">
-              Full Stack Developer crafting digital experiences
+              {aboutMe.jobTitle} crafting digital experiences
             </p>
           </motion.div>
 

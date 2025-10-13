@@ -6,52 +6,40 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { HeroButton } from "@/components/ui/button-variants";
 import { Mail, MapPin, Phone, Send } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePortfolio } from "@/contexts/PortfolioContext";
+import { Resend } from 'resend';
+import { sendEmail } from "@/lib/actions";
 
 const Contact = () => {
+  // const resend = new Resend(process.env.RESEND_API_KEY!);
+  const { state: { aboutMe } } = usePortfolio();
+  const [currentUrl, setCurrentUrl] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData(prev => ({
+  useEffect(() => {
+    // Get current URL on client side
+    setCurrentUrl(window.location.href);
+    console.log("Current URL set to:", window.location.href);
+  }, []);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log("Form submitted:", formData);
-  };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: "Email",
-      value: "alex@example.com",
-      href: "mailto:alex@example.com",
-    },
-    {
-      icon: Phone,
-      title: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
-    },
-    {
-      icon: MapPin,
-      title: "Location",
-      value: "San Francisco, CA",
-      href: "#",
-    },
-  ];
-
   return (
     <section id="contact" className="py-20 relative">
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -63,12 +51,12 @@ const Contact = () => {
             Get In <span className="gradient-text">Touch</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or just want to chat? I&apos;d love to hear from you.
-            Let&apos;s create something amazing together.
+            Have a project in mind or just want to chat? I&apos;d love to hear
+            from you. Let&apos;s create something amazing together.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="max-w-2xl mx-auto">
           {/* Contact Form */}
           <motion.div
             initial={{ x: -50, opacity: 0 }}
@@ -78,9 +66,12 @@ const Contact = () => {
           >
             <Card className="p-8">
               <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form action={`https://formsubmit.co/${aboutMe.email}`} className="space-y-6" method="POST">
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Name
                   </label>
                   <Input
@@ -95,7 +86,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Email
                   </label>
                   <Input
@@ -111,7 +105,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium mb-2"
+                  >
                     Message
                   </label>
                   <Textarea
@@ -122,70 +119,29 @@ const Contact = () => {
                     placeholder="Tell me about your project..."
                     required
                     rows={5}
-                    className="transition-smooth focus:glow resize-none"
+                    className="transition-smooth focus:glow resize-none h-30"
                   />
                 </div>
 
-                <HeroButton type="submit" variant="hero" size="lg" className="w-full group">
+                <input type="hidden" name="_captcha" value="false" />
+                <input type="text" name="_honey" className="hidden" />
+                <input type="hidden" name="_next" value={currentUrl} />
+
+
+                <HeroButton
+                  type="submit"
+                  variant="hero"
+                  size="lg"
+                  className="w-full group"
+                  disabled={isSubmitting}
+                >
                   <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-smooth" />
-                  Send Message
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </HeroButton>
               </form>
             </Card>
           </motion.div>
 
-          {/* Contact Info */}
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="space-y-6"
-          >
-            <div>
-              <h3 className="text-2xl font-semibold mb-6">Contact Information</h3>
-              <p className="text-muted-foreground mb-8">
-                I&apos;m always open to discussing new opportunities, interesting projects,
-                or just having a conversation about technology and development.
-              </p>
-            </div>
-
-            {contactInfo.map((info, index) => (
-              <motion.a
-                key={info.title}
-                href={info.href}
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="block group"
-              >
-                <Card className="p-6 hover:glow transition-smooth">
-                  <div className="flex items-center space-x-4">
-                    <div className="p-3 bg-primary/10 rounded-lg group-hover:bg-primary group-hover:text-primary-foreground transition-smooth">
-                      <info.icon className="w-6 h-6 text-primary group-hover:text-primary-foreground" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold group-hover:gradient-text transition-smooth">
-                        {info.title}
-                      </h4>
-                      <p className="text-muted-foreground">{info.value}</p>
-                    </div>
-                  </div>
-                </Card>
-              </motion.a>
-            ))}
-
-            {/* Additional CTA */}
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-            >
-
-            </motion.div>
-          </motion.div>
         </div>
       </div>
     </section>
