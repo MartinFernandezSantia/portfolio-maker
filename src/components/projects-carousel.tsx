@@ -57,10 +57,13 @@ export default function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
         opts={{
           slidesToScroll: 1,
           breakpoints: {
-            "(min-width: 768px)": { slidesToScroll: 2 },
+            "(min-width: 768px)": {
+              slidesToScroll: 2,
+              active: totalProjects > 2
+            },
             "(min-width: 1024px)": {
-              slidesToScroll: 3,
-              active: totalProjects > 3,
+              slidesToScroll: 2,
+              active: totalProjects > 2,
               watchDrag: false,
             },
           },
@@ -70,7 +73,7 @@ export default function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
           {projects.map((project, index) => (
             <CarouselItem
               key={project.title}
-              className="md:basis-1/2 lg:basis-1/3"
+              className="md:basis-1/2"
             >
               <Project project={project} index={index} />
             </CarouselItem>
@@ -163,29 +166,33 @@ function Project({ project }: ProjectProps) {
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          <HeroButton variant="outline" size="sm" className="flex-1">
-            <a
-              href={github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-full h-full"
-            >
-              <Github className="w-4 h-4 mr-2" />
-              Code
-            </a>
-          </HeroButton>
+          {project.github && (
+            <HeroButton variant="outline" size="sm" className="flex-1">
+              <a
+                href={github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-full h-full"
+              >
+                <Github className="w-4 h-4 mr-2" />
+                Code
+              </a>
+            </HeroButton>
+          )}
 
-          <HeroButton variant="hero" size="sm" className="flex-1">
-            <a
-              href={live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center w-full h-full"
-            >
-              <ExternalLink className="w-4 h-4 mr-2" />
-              Live Demo
-            </a>
-          </HeroButton>
+          {project.live && (
+            <HeroButton variant="hero" size="sm" className="flex-1">
+              <a
+                href={live}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-full h-full"
+              >
+                <ExternalLink className="w-4 h-4 mr-2" />
+                Live Demo
+              </a>
+            </HeroButton>
+          )}
         </div>
       </div>
     </Card>
