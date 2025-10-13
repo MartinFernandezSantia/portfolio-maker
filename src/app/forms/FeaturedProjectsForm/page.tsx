@@ -159,17 +159,16 @@ export function FeaturedProjectsForm() {
 
   const handleImageUpload = (files: FileList | null, projectId?: string) => {
     if (files && files.length > 0) {
-      const newImages = Array.from(files);
+      const newImage = files[0]; // Only take the first file
       if (projectId) {
         const project = projects.find((p: Project) => p.id === projectId);
         if (project) {
-          const updated = [...project.projectImages, ...newImages];
-          handleUpdateProject(projectId, "projectImages", updated);
+          handleUpdateProject(projectId, "projectImages", [newImage]);
         }
       } else {
         setNewProject({
           ...newProject,
-          projectImages: [...newProject.projectImages, ...newImages],
+          projectImages: [newImage],
         });
       }
     }
@@ -249,39 +248,32 @@ export function FeaturedProjectsForm() {
                       className="flex items-center space-x-2"
                     >
                       <Upload className="w-4 h-4" />
-                      <span>Upload Images</span>
+                      <span>Upload Image</span>
                     </Button>
                     <input
                       ref={fileInputRef}
                       type="file"
                       accept="image/*"
-                      multiple
                       onChange={(e) => handleImageUpload(e.target.files)}
                       className="hidden"
                     />
                   </div>
 
                   {newProject.projectImages.length > 0 && (
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                      {newProject.projectImages.map(
-                        (image: File, index: number) => (
-                          <div key={index} className="relative group">
-                            <img
-                              src={getImageUrl(image)}
-                              alt={`Project image ${index + 1}`}
-                              className="w-full h-24 object-cover rounded-lg border-2 border-border"
-                            />
-                            <Button
-                              variant="destructive"
-                              size="sm"
-                              className="absolute top-1 right-1 h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                              onClick={() => removeImage(index)}
-                            >
-                              <X className="w-3 h-3" />
-                            </Button>
-                          </div>
-                        ),
-                      )}
+                    <div className="relative group inline-block">
+                      <img
+                        src={getImageUrl(newProject.projectImages[0])}
+                        alt="Project image"
+                        className="w-full max-w-md h-48 object-cover rounded-lg border-2 border-border"
+                      />
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        className="absolute top-2 right-2 h-8 w-8 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                        onClick={() => removeImage(0)}
+                      >
+                        <X className="w-4 h-4" />
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -420,28 +412,20 @@ export function FeaturedProjectsForm() {
 
                         {/* Project Images */}
                         {project.projectImages.length > 0 && (
-                          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
-                            {project.projectImages.map(
-                              (image: File, index: number) => (
-                                <div key={index} className="relative group">
-                                  <img
-                                    src={getImageUrl(image)}
-                                    alt={`${project.projectName} image ${index + 1}`}
-                                    className="w-full h-20 object-cover rounded border"
-                                  />
-                                  <Button
-                                    variant="destructive"
-                                    size="sm"
-                                    className="absolute top-1 right-1 h-5 w-5 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
-                                    onClick={() =>
-                                      removeImage(index, project.id)
-                                    }
-                                  >
-                                    <X className="w-2 h-2" />
-                                  </Button>
-                                </div>
-                              ),
-                            )}
+                          <div className="relative group inline-block mb-4">
+                            <img
+                              src={getImageUrl(project.projectImages[0])}
+                              alt={`${project.projectName} image`}
+                              className="w-full max-w-sm h-32 object-cover rounded border"
+                            />
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              className="absolute top-1 right-1 h-6 w-6 p-0 opacity-0 group-hover:opacity-100 transition-opacity"
+                              onClick={() => removeImage(0, project.id)}
+                            >
+                              <X className="w-3 h-3" />
+                            </Button>
                           </div>
                         )}
 

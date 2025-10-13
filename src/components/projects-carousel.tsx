@@ -30,7 +30,7 @@ export default function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
   const { width } = useWindowSize();
 
   const totalProjects = projects.length;
-  const slidesToShow = width < 768 ? 1 : width < 1024 ? 2 : 3;
+  const slidesToShow = width < 768 ? 1 : 2;
   const carouselBullets = Math.ceil(totalProjects / slidesToShow);
 
   // Update current slide on select
