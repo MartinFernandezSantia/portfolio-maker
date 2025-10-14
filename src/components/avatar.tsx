@@ -21,14 +21,14 @@ export default function Avatar({ className = "" }: { className?: string }) {
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className={`mb-8 ${className}`}
+      className={`mb-4 2xl:mb-8 ${className}`}
     >
       <Image
         src={getProfilePhotoUrl() || placeholder}
         alt={aboutMe.fullName || "Profile"}
         width={128}
         height={128}
-        className="w-44 h-44 rounded-full mx-auto glow border-4 border-primary"
+        className="w-40 h-40 2xl:w-44 2xl:h-44 rounded-full mx-auto glow border-4 border-primary"
       />
     </motion.div>
   );

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 type SubtitleProps = {
   children: React.ReactNode;
   size?: "sm" | "md" | "lg";
+  className?: string;
 };
 
 const sizeClasses = {
@@ -13,7 +14,7 @@ const sizeClasses = {
   lg: "text-lg md:text-xl",
 };
 
-export default function Subtitle({ children, size = "md" }: SubtitleProps) {
+export default function Subtitle({ children, size = "md", className }: SubtitleProps) {
   return (
     <motion.p
       initial={{ y: 30, opacity: 0 }}
@@ -22,6 +23,7 @@ export default function Subtitle({ children, size = "md" }: SubtitleProps) {
       className={cn(
         "text-xl md:text-2xl text-muted-foreground mb-8 max-w-2xl mx-auto",
         sizeClasses[size],
+        className
       )}
     >
       {children}

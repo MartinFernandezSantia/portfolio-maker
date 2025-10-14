@@ -9,11 +9,11 @@ type ScrollDownProps = {
   className?: string;
 };
 
-export default function ScrollDown({ scrollTo, className = "" }: ScrollDownProps) {
+export default function ScrollDown({ scrollTo }: ScrollDownProps) {
   return (
     <motion.button
       onClick={() => scrollToSection(scrollTo)}
-      className={`text-primary ${className}`}
+      className={"text-primary "}
       animate={{ y: [0, 10, 0] }}
       transition={{ duration: 1.5, repeat: Infinity }}
       aria-label="Scroll to about section"

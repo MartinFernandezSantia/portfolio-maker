@@ -1,9 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card } from "../ui/card";
 import { usePortfolio } from "@/contexts/PortfolioContext";
-import { Github, Linkedin } from "lucide-react";
 
 const About = () => {
   const { state } = usePortfolio();
@@ -22,66 +20,40 @@ const About = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             About <span className="gradient-text">Me</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-5xl mx-auto text-justify">
+          <p className="text-lg text-white/80 max-w-5xl mx-auto text-justify whitespace-pre-line">
             {aboutMe.aboutMe}
           </p>
         </motion.div>
 
-        {/* <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <motion.div
-              key={feature.title}
-              initial={{ y: 50, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="p-6 h-full hover:glow transition-smooth group">
-                <motion.div
-                  className="mb-4 p-3 rounded-lg bg-primary/10 w-fit"
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <feature.icon className="w-6 h-6 text-primary" />
-                </motion.div>
-                <h3 className="text-xl font-semibold mb-3 group-hover:gradient-text transition-smooth">
-                  {feature.title}
-                </h3>
-                <p className="text-muted-foreground">
-                  {feature.description}
-                </p>
-              </Card>
-            </motion.div>
-          ))}
-        </div> */}
-
         {/* Skills section */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="mt-20 text-center"
-        >
-          <h3 className="text-2xl font-bold mb-8">
-            <span className="gradient-text">Tech Stack</span>
-          </h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {aboutMe.techStack.map((tech, index) => (
-              <motion.div
-                key={tech}
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-smooth cursor-default group"
-              >
-                {/* <tech.icon className="w-4 h-4 group-hover:scale-110 transition-transform" /> */}
-                <span>{tech}</span>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+        <section id="skills" className="py-20 relative">
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="mt-20 text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <span className="gradient-text">Tech Stack</span>
+            </h2>
+            <div className="flex flex-wrap justify-center gap-4">
+              {aboutMe.techStack.map((tech, index) => (
+                <motion.div
+                  key={tech}
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.4, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  className="flex items-center gap-2 px-4 py-2 bg-secondary rounded-full text-sm font-medium hover:bg-primary hover:text-primary-foreground transition-smooth cursor-default group"
+                >
+                  {/* <tech.icon className="w-4 h-4 group-hover:scale-110 transition-transform" /> */}
+                  <span>{tech}</span>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </section>
       </div>
     </section>
   );
