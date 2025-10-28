@@ -2,7 +2,6 @@
 
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import html2pdf from "html2pdf.js";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -16,21 +15,41 @@ export const scrollToSection = (href: string) => {
   }
 };
 
-export async function generatePortfolioPDF() {
-  if (typeof window === "undefined") return; // evita SSR
-
-  const html2pdf = (await import("html2pdf.js")).default;
-
-  const element = document.getElementById("portfolio-content");
-  if (!element) return;
-
-  const opt = {
-    margin: 0.5,
-    filename: "my-portfolio.pdf",
-    image: { type: "jpeg" as "jpeg", quality: 0.98 },
-    html2canvas: { scale: 2 },
-    jsPDF: { unit: "in", format: "a4", orientation: "portrait" as "portrait" },
+export const downloadPortfolio = async () => {
+  const vars = {
+    fullname: "John Doe",
+    email: "john.doe@example.com",
+    apiKey: "your_api_key"
   };
 
-  html2pdf().set(opt).from(element).save();
+  try {
+    // Call API route to generate zip
+    const response = await fetch('/api/download-portfolio', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(vars),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to generate portfolio');
+    }
+
+    // Get the zip file as blob
+    const blob = await response.blob();
+
+    // Trigger download
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'portfolio.zip';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Error downloading portfolio:', error);
+    throw error;
+  }
 }

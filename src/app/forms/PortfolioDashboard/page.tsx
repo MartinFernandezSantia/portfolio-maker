@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { generatePortfolioPDF } from "@/lib/utils";
+import { downloadPortfolio } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   User,
@@ -161,7 +161,7 @@ function PortfolioSidebar({
                 <Button
                   className="btn-gradient w-full justify-start"
                   size="sm"
-                  onClick={generatePortfolioPDF}
+                  onClick={downloadPortfolio}
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Generate Portfolio
@@ -301,16 +301,16 @@ function MainContent() {
 
           {/*Action Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-  <PreviewButton className="w-auto justify-center" />
-  <Button
-    className="btn-gradient"
-    size="sm"
-    onClick={generatePortfolioPDF}
-  >
-    <Download className="w-4 h-4 mr-2" />
-    Generate Portfolio
-  </Button>
-</div>
+            <PreviewButton className="w-auto justify-center" />
+            <Button
+              className="btn-gradient"
+              size="sm"
+              onClick={downloadPortfolio}
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Generate Portfolio
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -326,7 +326,7 @@ function MainContent() {
             <Eye className="w-4 h-4 mr-2" />
             Preview
           </Button>
-          <Button className="btn-gradient flex-1" size="sm">
+          <Button className="btn-gradient flex-1" size="sm" onClick={downloadPortfolio}>
             <Download className="w-4 h-4 mr-2" />
             Generate
           </Button>
