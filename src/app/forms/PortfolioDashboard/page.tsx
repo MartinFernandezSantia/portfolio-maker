@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { generatePortfolioPDF } from "@/lib/utils";
+import { downloadPortfolio } from "@/lib/utils";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   User,
@@ -161,7 +161,7 @@ function PortfolioSidebar({
                 <Button
                   className="btn-gradient w-full justify-start"
                   size="sm"
-                  onClick={generatePortfolioPDF}
+                  onClick={downloadPortfolio}
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Generate Portfolio
@@ -302,7 +302,7 @@ function MainContent() {
             <Button
               className="btn-gradient"
               size="sm"
-              onClick={generatePortfolioPDF}
+              onClick={downloadPortfolio}
             >
               <Download className="w-4 h-4 mr-2" />
               Generate Portfolio
@@ -319,8 +319,11 @@ function MainContent() {
       {/* Mobile Action Bar */}
       <div className="lg:hidden sticky bottom-0 bg-background/80 backdrop-blur-sm border-t p-4">
         <div className="flex space-x-3">
-          <PreviewButton className="flex-1" />
-          <Button className="btn-gradient flex-1" size="sm" onClick={generatePortfolioPDF}>
+          <Button variant="outline" className="flex-1" size="sm">
+            <Eye className="w-4 h-4 mr-2" />
+            Preview
+          </Button>
+          <Button className="btn-gradient flex-1" size="sm" onClick={downloadPortfolio}>
             <Download className="w-4 h-4 mr-2" />
             Generate
           </Button>
