@@ -42,7 +42,7 @@ function PreviewButton({ className = "" }: { className?: string }) {
       onClick={() => router.push("/preview")}
     >
       <Eye className="w-4 h-4 mr-2" />
-      Preview Portfolio
+      Preview 
     </Button>
   );
 }
@@ -238,15 +238,12 @@ function MobileSidebar() {
 
           {/* Action Buttons */}
           <div className="space-y-3">
+            <PreviewButton className="w-full justify-start" />
             <Button
-              variant="outline"
-              className="w-full justify-start"
+              className="btn-gradient w-full justify-start"
               size="sm"
+              onClick={generatePortfolioPDF}
             >
-              <Eye className="w-4 h-4 mr-2" />
-              Preview Portfolio
-            </Button>
-            <Button className="btn-gradient w-full justify-start" size="sm">
               <Download className="w-4 h-4 mr-2" />
               Generate Portfolio
             </Button>
@@ -301,16 +298,16 @@ function MainContent() {
 
           {/*Action Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
-  <PreviewButton className="w-auto justify-center" />
-  <Button
-    className="btn-gradient"
-    size="sm"
-    onClick={generatePortfolioPDF}
-  >
-    <Download className="w-4 h-4 mr-2" />
-    Generate Portfolio
-  </Button>
-</div>
+            <PreviewButton className="w-auto justify-center" />
+            <Button
+              className="btn-gradient"
+              size="sm"
+              onClick={generatePortfolioPDF}
+            >
+              <Download className="w-4 h-4 mr-2" />
+              Generate Portfolio
+            </Button>
+          </div>
         </div>
       </header>
 
@@ -322,11 +319,8 @@ function MainContent() {
       {/* Mobile Action Bar */}
       <div className="lg:hidden sticky bottom-0 bg-background/80 backdrop-blur-sm border-t p-4">
         <div className="flex space-x-3">
-          <Button variant="outline" className="flex-1" size="sm">
-            <Eye className="w-4 h-4 mr-2" />
-            Preview
-          </Button>
-          <Button className="btn-gradient flex-1" size="sm">
+          <PreviewButton className="flex-1" />
+          <Button className="btn-gradient flex-1" size="sm" onClick={generatePortfolioPDF}>
             <Download className="w-4 h-4 mr-2" />
             Generate
           </Button>

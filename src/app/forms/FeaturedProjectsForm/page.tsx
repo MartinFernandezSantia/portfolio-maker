@@ -29,6 +29,7 @@ import {
   ExternalLink,
   Github,
   Image as ImageIcon,
+  Edit,
 } from "lucide-react";
 import { usePortfolio, Project } from "@/contexts/PortfolioContext";
 
@@ -128,6 +129,23 @@ export function FeaturedProjectsForm() {
 
   const handleDeleteProject = (id: string) => {
     dispatch({ type: "DELETE_PROJECT", payload: id });
+  };
+
+  // Edit: carga el proyecto al formulario y elimina el original (igual que WorkExperience)
+  const handleEditProject = (id: string) => {
+    const project = projects.find((p: Project) => p.id === id);
+    if (project) {
+      setNewProject({
+        projectName: project.projectName,
+        projectImages: project.projectImages || [],
+        description: project.description || "",
+        technologiesUsed: project.technologiesUsed || [],
+        githubLink: project.githubLink || "",
+        liveDemoLink: project.liveDemoLink || "",
+      });
+      setIsAdding(true);
+      handleDeleteProject(id);
+    }
   };
 
   const addTechnology = (tech: string, isNew: boolean = false) => {
@@ -393,26 +411,21 @@ export function FeaturedProjectsForm() {
               <h3 className="text-lg font-semibold">Your Featured Projects</h3>
 
               {projects.map((project: Project) => (
-                <Card key={project.id} className="border-l-4 border-l-primary">
-                  <CardContent className="pt-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex-1">
-                        <Input
-                          value={project.projectName}
-                          onChange={(e) =>
-                            handleUpdateProject(
-                              project.id,
-                              "projectName",
-                              e.target.value,
-                            )
-                          }
-                          className="font-semibold text-xl border-none p-0 h-auto bg-transparent focus-visible:ring-0 mb-4"
-                          placeholder="Project Name"
-                        />
+                <Card
+                  key={project.id}
+                  className="group relative overflow-hidden border-l-4 border-l-primary bg-card p-4 transition-all hover:shadow-md"
+                >
+                  <CardContent className="pt-2 pb-4">
+                    <div className="flex justify-between items-start mb-4 gap-4">
+                      <div className="flex-1 min-w-0">
+                        {/* Título no editable (truncate para evitar overflow) */}
+                        <h3 className="text-xl font-semibold text-foreground break-words truncate">
+                          {project.projectName}
+                        </h3>
 
                         {/* Project Images */}
                         {project.projectImages.length > 0 && (
-                          <div className="relative group inline-block mb-4">
+                          <div className="relative group inline-block my-3">
                             <img
                               src={getImageUrl(project.projectImages[0])}
                               alt={`${project.projectName} image`}
@@ -431,7 +444,7 @@ export function FeaturedProjectsForm() {
 
                         {/* Technologies */}
                         {project.technologiesUsed.length > 0 && (
-                          <div className="flex flex-wrap gap-1 mb-4">
+                          <div className="flex flex-wrap gap-1 mb-3">
                             {project.technologiesUsed.map((tech: string) => (
                               <Badge
                                 key={tech}
@@ -445,12 +458,13 @@ export function FeaturedProjectsForm() {
                         )}
 
                         {/* Links */}
-                        <div className="flex space-x-4 mb-4">
+                        <div className="flex space-x-4 mb-3">
                           {project.githubLink && (
                             <a
                               href={project.githubLink}
                               target="_blank"
                               rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
                               className="flex items-center space-x-1 text-sm text-muted-foreground hover:text-primary transition-colors"
                             >
                               <Github className="w-4 h-4" />
@@ -462,6 +476,7 @@ export function FeaturedProjectsForm() {
                               href={project.liveDemoLink}
                               target="_blank"
                               rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
                               className="flex items-center space-x-1 text-sm text-muted-foreground hover:text-primary transition-colors"
                             >
                               <ExternalLink className="w-4 h-4" />
@@ -469,29 +484,38 @@ export function FeaturedProjectsForm() {
                             </a>
                           )}
                         </div>
-                      </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleDeleteProject(project.id)}
-                        className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
-                    </div>
 
-                    <Textarea
-                      value={project.description}
-                      onChange={(e) =>
-                        handleUpdateProject(
-                          project.id,
-                          "description",
-                          e.target.value,
-                        )
-                      }
-                      placeholder="Describe your project, its purpose, and key features..."
-                      className="min-h-[80px] resize-none transition-all duration-300 focus:shadow-lg"
-                    />
+                        {/* Description no editable */}
+                        <div className="rounded-md bg-muted/50 p-3 -mx-3">
+                          <p className="text-sm leading-relaxed text-muted-foreground break-words">
+                            {project.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Acciones: editar y eliminar - solo desde botones */}
+                      <div className="flex-shrink-0 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100 ml-3">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleEditProject(project.id)}
+                          className="h-8 w-8"
+                          title="Edit"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDeleteProject(project.id)}
+                          className="h-8 w-8 text-destructive hover:text-destructive"
+                          title="Delete"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
+
+                    </div>
                   </CardContent>
                 </Card>
               ))}
