@@ -1,5 +1,6 @@
 "use client";
 
+import { PortfolioState } from "@/contexts/PortfolioContext";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -15,25 +16,63 @@ export const scrollToSection = (href: string) => {
   }
 };
 
-export const downloadPortfolio = async () => {
-  const vars = {
-    fullname: "John Doe",
-    email: "john.doe@example.com",
-    apiKey: "your_api_key"
-  };
-
+export const downloadPortfolio = async (data: PortfolioState) => {
   try {
+    const formData = new FormData();
+
+    // Add hero data
+    formData.append('hero.firstName', data.hero.firstName);
+    formData.append('hero.lastName', data.hero.lastName);
+    formData.append('hero.headline', data.hero.headline);
+
+    // Add about me data
+    formData.append('aboutMe.fullName', data.aboutMe.fullName);
+    formData.append('aboutMe.jobTitle', data.aboutMe.jobTitle);
+    formData.append('aboutMe.githubLink', data.aboutMe.githubLink);
+    formData.append('aboutMe.linkedinLink', data.aboutMe.linkedinLink);
+    formData.append('aboutMe.email', data.aboutMe.email);
+    formData.append('aboutMe.aboutMe', data.aboutMe.aboutMe);
+    formData.append('aboutMe.techStack', JSON.stringify(data.aboutMe.techStack));
+    formData.append('aboutMe.features', JSON.stringify(data.aboutMe.features));
+
+    // Add profile photo
+    if (data.aboutMe.profilePhoto) {
+      formData.append('aboutMe.profilePhoto', data.aboutMe.profilePhoto);
+    }
+
+    // Add work experience
+    formData.append('workExperience', JSON.stringify(data.workExperience));
+
+    // Add education
+    formData.append('education', JSON.stringify(data.education));
+
+    // Add projects (without images first)
+    const projectsWithoutImages = data.projects.map(project => ({
+      id: project.id,
+      projectName: project.projectName,
+      description: project.description,
+      technologiesUsed: project.technologiesUsed,
+      githubLink: project.githubLink,
+      liveDemoLink: project.liveDemoLink,
+    }));
+    formData.append('projects', JSON.stringify(projectsWithoutImages));
+
+    // Add project images
+    data.projects.forEach((project) => {
+      project.projectImages.forEach((image, index) => {
+        formData.append(`project.${project.id}.image.${index}`, image);
+      });
+    });
+
     // Call API route to generate zip
     const response = await fetch('/api/download-portfolio', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(vars),
+      body: formData,
     });
 
     if (!response.ok) {
-      throw new Error('Failed to generate portfolio');
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Failed to generate portfolio');
     }
 
     // Get the zip file as blob

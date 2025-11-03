@@ -161,7 +161,7 @@ function PortfolioSidebar({
                 <Button
                   className="btn-gradient w-full justify-start"
                   size="sm"
-                  onClick={downloadPortfolio}
+                  onClick={async () => await downloadPortfolio(state)}
                 >
                   <Download className="w-4 h-4 mr-2" />
                   Generate Portfolio
@@ -305,7 +305,7 @@ function MainContent() {
             <Button
               className="btn-gradient"
               size="sm"
-              onClick={downloadPortfolio}
+              onClick={async () => await downloadPortfolio(state)}
             >
               <Download className="w-4 h-4 mr-2" />
               Generate Portfolio
@@ -326,7 +326,7 @@ function MainContent() {
             <Eye className="w-4 h-4 mr-2" />
             Preview
           </Button>
-          <Button className="btn-gradient flex-1" size="sm" onClick={downloadPortfolio}>
+          <Button className="btn-gradient flex-1" size="sm" onClick={async () => await downloadPortfolio(state)}>
             <Download className="w-4 h-4 mr-2" />
             Generate
           </Button>

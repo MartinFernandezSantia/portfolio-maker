@@ -19,7 +19,7 @@ const Experience = () => {
     return `${month} ${year}`;
   };
 
-   const sortedWorkExperience = [...workExperience].sort((a, b) => {
+  const sortedWorkExperience = [...workExperience].sort((a, b) => {
     const dateA = a.endDate || a.startDate;
     const dateB = b.endDate || b.startDate;
     return new Date(dateB).getTime() - new Date(dateA).getTime();
