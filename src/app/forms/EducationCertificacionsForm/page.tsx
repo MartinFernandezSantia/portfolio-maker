@@ -23,6 +23,7 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Trash2, GraduationCap, Calendar, School } from "lucide-react";
 import { usePortfolio, Education } from "@/contexts/PortfolioContext";
+import { Edit } from "lucide-react";
 
 export default function Page() {
   return <EducationCertificationsForm />;
@@ -78,6 +79,22 @@ export function EducationCertificationsForm() {
     dispatch({ type: "DELETE_EDUCATION", payload: id });
   };
 
+  const handleEditEducation = (id: string) => {
+    const edu = education.find((e) => e.id === id);
+    if (edu) {
+      setNewEducation({
+        title: edu.title,
+        academy: edu.academy,
+        startDate: edu.startDate || "",
+        endDate: edu.endDate || "",
+        certificateType: edu.certificateType || "diploma",
+        description: edu.description || "",
+      });
+      setIsAdding(true);
+      handleDeleteEducation(id);
+    }
+  };
+
   const getBadgeVariant = (type: string) => {
     switch (type) {
       case "diploma":
@@ -128,9 +145,10 @@ export function EducationCertificationsForm() {
                       onChange={(e) =>
                         setNewEducation({
                           ...newEducation,
-                          title: e.target.value,
+                          title: e.target.value.slice(0, 50), // limitar a 50 caracteres
                         })
                       }
+                      maxLength={50}
                       placeholder="Bachelor of Computer Science"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -143,9 +161,10 @@ export function EducationCertificationsForm() {
                       onChange={(e) =>
                         setNewEducation({
                           ...newEducation,
-                          academy: e.target.value,
+                          academy: e.target.value.slice(0, 50), // limitar a 50 caracteres
                         })
                       }
+                      maxLength={50}
                       placeholder="University of Technology"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -205,7 +224,7 @@ export function EducationCertificationsForm() {
                           endDate: e.target.value,
                         })
                       }
-                       min={newEducation.startDate} // <-- Solo permite fechas iguales o posteriores al startDate
+                      min={newEducation.startDate} // <-- Solo permite fechas iguales o posteriores al startDate
                       placeholder="Leave empty if ongoing"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
@@ -249,70 +268,33 @@ export function EducationCertificationsForm() {
               </h3>
 
               {education.map((edu: Education) => (
-                <Card key={edu.id} className="border-l-4 border-l-secondary">
-                  <CardContent className="pt-6">
-                    <div className="flex justify-between items-start mb-4">
-                      <div className="flex-1">
+                <Card
+                  key={edu.id}
+                  className="group relative overflow-hidden border-l-4 border-l-secondary bg-card p-6 transition-all hover:shadow-md"
+                >
+                  <div className="space-y-3 overflow-hidden">
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex-1 min-w-0">
                         <div className="flex items-center space-x-2 mb-2">
                           <GraduationCap className="w-4 h-4 text-secondary" />
-                          <Input
-                            value={edu.title}
-                            onChange={(e) =>
-                              handleUpdateEducation(
-                                edu.id,
-                                "title",
-                                e.target.value,
-                              )
-                            }
-                            className="font-semibold text-lg border-none p-0 h-auto bg-transparent focus-visible:ring-0"
-                            placeholder="Title/Degree"
-                          />
+                          {/* Mostrar título como texto estático (limitado al guardar en el formulario) */}
+                          <div className="font-semibold text-lg p-0 h-auto bg-transparent break-words">
+                            {edu.title}
+                          </div>
                         </div>
                         <div className="flex items-center space-x-2 mb-2">
                           <School className="w-4 h-4 text-secondary" />
-                          <Input
-                            value={edu.academy}
-                            onChange={(e) =>
-                              handleUpdateEducation(
-                                edu.id,
-                                "academy",
-                                e.target.value,
-                              )
-                            }
-                            className="text-secondary font-medium border-none p-0 h-auto bg-transparent focus-visible:ring-0"
-                            placeholder="Institution/Academy"
-                          />
+                          {/* Mostrar institución como texto estático */}
+                          <div className="text-secondary font-medium p-0 h-auto bg-transparent break-words">
+                            {edu.academy}
+                          </div>
                         </div>
                         <div className="flex items-center space-x-4 mb-4">
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-2 min-w-0">
                             <Calendar className="w-3 h-3 text-muted-foreground" />
-                            <Input
-                              type="month"
-                              value={edu.startDate}
-                              onChange={(e) =>
-                                handleUpdateEducation(
-                                  edu.id,
-                                  "startDate",
-                                  e.target.value,
-                                )
-                              }
-                              className="text-sm text-muted-foreground border-none p-0 h-auto bg-transparent focus-visible:ring-0 w-auto"
-                            />
-                            <span className="text-muted-foreground">-</span>
-                            <Input
-                              type="month"
-                              value={edu.endDate}
-                              onChange={(e) =>
-                                handleUpdateEducation(
-                                  edu.id,
-                                  "endDate",
-                                  e.target.value,
-                                )
-                              }
-                              min={edu.startDate} // <-- Solo permite fechas iguales o posteriores al startDate
-                              placeholder="Present"
-                              className="text-sm text-muted-foreground border-none p-0 h-auto bg-transparent focus-visible:ring-0 w-auto"
-                            />
+                            <div className="text-sm text-muted-foreground p-0 h-auto bg-transparent truncate">
+                              {edu.startDate} - {edu.endDate || "Present"}
+                            </div>
                           </div>
                           <Badge
                             variant={getBadgeVariant(edu.certificateType)}
@@ -320,35 +302,45 @@ export function EducationCertificationsForm() {
                           >
                             {
                               certificateTypes[
-                                edu.certificateType as keyof typeof certificateTypes
+                              edu.certificateType as keyof typeof certificateTypes
                               ]
                             }
                           </Badge>
                         </div>
                       </div>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => handleDeleteEducation(edu.id)}
-                        className="text-destructive hover:text-destructive hover:bg-destructive/10"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </Button>
+
+                      <div className="flex-shrink-0 flex gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleEditEducation(edu.id)}
+                          className="h-8 w-8"
+                        >
+                          <Edit className="w-4 h-4" />
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => handleDeleteEducation(edu.id)}
+                          className="h-8 w-8 text-destructive hover:text-destructive hover:bg-destructive/10"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </Button>
+                      </div>
                     </div>
 
-                    <Textarea
-                      value={edu.description}
-                      onChange={(e) =>
-                        handleUpdateEducation(
-                          edu.id,
-                          "description",
-                          e.target.value,
-                        )
-                      }
-                      placeholder="Describe what you learned, key subjects, or achievements..."
-                      className="min-h-[80px] resize-none transition-all duration-300 focus:shadow-lg"
-                    />
-                  </CardContent>
+                    {/* Descripción como texto estático (no editable) */}
+                     {edu.description ? (
+                      <div className="text-muted-foreground text-sm leading-relaxed break-words max-h-20 overflow-auto whitespace-pre-wrap">
+                        {edu.description}
+                      </div>
+                    ) : null}
+                    {edu.description ? (
+                      <div className="text-muted-foreground text-sm leading-relaxed w-full max-h-20 overflow-y-auto overflow-x-hidden whitespace-normal break-words break-all">
+                        {edu.description}
+                      </div>
+                    ) : null}
+                  </div>
                 </Card>
               ))}
             </div>

@@ -42,7 +42,7 @@ function PreviewButton({ className = "" }: { className?: string }) {
       onClick={() => router.push("/preview")}
     >
       <Eye className="w-4 h-4 mr-2" />
-      Preview Portfolio
+      Preview 
     </Button>
   );
 }
@@ -238,15 +238,12 @@ function MobileSidebar() {
 
           {/* Action Buttons */}
           <div className="space-y-3">
+            <PreviewButton className="w-full justify-start" />
             <Button
-              variant="outline"
-              className="w-full justify-start"
+              className="btn-gradient w-full justify-start"
               size="sm"
+           
             >
-              <Eye className="w-4 h-4 mr-2" />
-              Preview Portfolio
-            </Button>
-            <Button className="btn-gradient w-full justify-start" size="sm">
               <Download className="w-4 h-4 mr-2" />
               Generate Portfolio
             </Button>
