@@ -28,7 +28,8 @@ export default function Socials() {
           key={label}
           href={href}
           target="_blank"
-          className="p-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth glow"
+          rel="noopener noreferrer"
+          className="p-3 rounded-full border border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth glow cursor-pointer"
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.95 }}
           aria-label={label}

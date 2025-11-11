@@ -20,7 +20,7 @@ export default function CTA() {
         className="w-full sm:w-auto sm:min-w-[180px]"
         onClick={() => scrollToSection("#contact")}
       >
-        Get In Touch
+        Contactar
       </HeroButton>
 
       <HeroButton
@@ -29,7 +29,7 @@ export default function CTA() {
         className="group w-full sm:w-auto sm:min-w-[180px]"
         onClick={() => scrollToSection("#projects")}
       >
-        View My Work
+        Ver Mi Trabajo
         <motion.span
           className="ml-2"
           animate={{ x: [0, 5, 0] }}

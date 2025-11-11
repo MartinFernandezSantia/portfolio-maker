@@ -18,7 +18,7 @@ const About = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            About <span className="gradient-text">Me</span>
+            Sobre <span className="gradient-text">Mí</span>
           </h2>
           <p className="text-lg text-white/80 max-w-5xl mx-auto text-justify whitespace-pre-line">
             {aboutMe.aboutMe}
@@ -35,7 +35,7 @@ const About = () => {
             className="mt-20 text-center"
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              <span className="gradient-text">Tech Stack</span>
+              <span className="gradient-text">Stack Tecnológico</span>
             </h2>
             <div className="flex flex-wrap justify-center gap-4">
               {aboutMe.techStack.map((tech, index) => (

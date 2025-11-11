@@ -23,11 +23,11 @@ const Contact = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Get In <span className="gradient-text">Touch</span>
+            Ponte en <span className="gradient-text">Contacto</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Have a project in mind or just want to chat? I&apos;d love to hear
-            from you. Let&apos;s create something amazing together.
+            ¿Tienes un proyecto en mente o simplemente quieres charlar? Me encantaría
+            saber de ti. Creemos algo increíble juntos.
           </p>
         </motion.div>
 
@@ -40,7 +40,7 @@ const Contact = () => {
             viewport={{ once: true }}
           >
             <Card className="p-8">
-              <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
+              <h3 className="text-2xl font-semibold mb-6">Enviar un Mensaje</h3>
               {/* <ContactForm /> */}
               <PreviewContactForm />
 
@@ -148,7 +148,7 @@ function ContactForm() {
         disabled={isSubmitting}
       >
         <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-smooth" />
-        {isSubmitting ? "Sending..." : "Send Message"}
+        {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
       </HeroButton>
     </form>
   );
@@ -174,7 +174,7 @@ function PreviewContactForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    toast.warning("Form submission is disabled in preview mode.", { className: "md:!w-[450px] md:!text-[1rem] md:!gap-5", richColors: true });
+    toast.warning("El envío de formularios está deshabilitado en modo vista previa.", { className: "md:!w-[450px] md:!text-[1rem] md:!gap-5", richColors: true });
     setIsSubmitting(false);
   }
 
@@ -185,14 +185,14 @@ function PreviewContactForm() {
           htmlFor="name"
           className="block text-sm font-medium mb-2"
         >
-          Name
+          Nombre
         </label>
         <Input
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          placeholder="Your name"
+          placeholder="Tu nombre"
           required
           className="transition-smooth focus:glow"
         />
@@ -203,7 +203,7 @@ function PreviewContactForm() {
           htmlFor="email"
           className="block text-sm font-medium mb-2"
         >
-          Email
+          Correo Electrónico
         </label>
         <Input
           id="email"
@@ -211,7 +211,7 @@ function PreviewContactForm() {
           type="email"
           value={formData.email}
           onChange={handleChange}
-          placeholder="your.email@example.com"
+          placeholder="tu.correo@ejemplo.com"
           required
           className="transition-smooth focus:glow"
         />
@@ -222,14 +222,14 @@ function PreviewContactForm() {
           htmlFor="message"
           className="block text-sm font-medium mb-2"
         >
-          Message
+          Mensaje
         </label>
         <Textarea
           id="message"
           name="message"
           value={formData.message}
           onChange={handleChange}
-          placeholder="Tell me about your project..."
+          placeholder="Cuéntame sobre tu proyecto..."
           required
           rows={5}
           className="transition-smooth focus:glow resize-none h-30"
@@ -244,7 +244,7 @@ function PreviewContactForm() {
         disabled={isSubmitting}
       >
         <Send className="w-4 h-4 mr-2 group-hover:translate-x-1 transition-smooth" />
-        {isSubmitting ? "Sending..." : "Send Message"}
+        {isSubmitting ? "Enviando..." : "Enviar Mensaje"}
       </HeroButton>
     </form>
   )

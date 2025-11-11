@@ -29,7 +29,7 @@ const Footer = () => {
               {aboutMe.fullName}
             </h3>
             <p className="text-muted-foreground text-sm">
-              {aboutMe.jobTitle} crafting digital experiences
+              {aboutMe.jobTitle} creando experiencias digitales
             </p>
           </motion.div>
 
@@ -42,7 +42,7 @@ const Footer = () => {
             className="text-center"
           >
             <p className="text-sm text-muted-foreground">
-              Let&apos;s create something amazing together
+              Creemos algo increíble juntos
             </p>
           </motion.div>
 
@@ -78,14 +78,14 @@ const Footer = () => {
           className="border-t border-border mt-8 pt-8 text-center"
         >
           <p className="text-sm text-muted-foreground flex flex-col md:flex-row items-center md:justify-center gap-2">
-            © {currentYear} {aboutMe.fullName}. Made with
+            © {currentYear} {aboutMe.fullName}. Hecho con
             <motion.span
               animate={{ scale: [1, 1.2, 1] }}
               transition={{ duration: 1.5, repeat: Infinity }}
             >
               <Heart className="w-4 h-4 text-red-500 fill-current" />
             </motion.span>
-            using React & TypeScript
+            usando React y TypeScript
           </p>
         </motion.div>
       </div>

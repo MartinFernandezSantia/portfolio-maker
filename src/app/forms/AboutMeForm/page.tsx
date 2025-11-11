@@ -124,10 +124,10 @@ export function AboutMeForm() {
       <Card className="form-card">
         <CardHeader>
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            About Me
+            Sobre Mí
           </CardTitle>
           <CardDescription>
-            Let&apos;s start with your basic information and professional profile
+            Comencemos con tu información básica y perfil profesional
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -161,29 +161,29 @@ export function AboutMeForm() {
               className="hidden"
             />
             <p className="text-sm text-muted-foreground text-center">
-              Click the camera icon to upload your profile photo
+              Haz clic en el ícono de la cámara para subir tu foto de perfil
             </p>
           </div>
 
           {/* Personal Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="fullName">Full Name *</Label>
+              <Label htmlFor="fullName">Nombre Completo *</Label>
               <Input
                 id="fullName"
                 value={aboutMe.fullName}
                 onChange={(e) => handleInputChange("fullName", e.target.value)}
-                placeholder="John Doe"
+                placeholder="Juan Pérez"
                 className="transition-all duration-300 focus:shadow-lg"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="jobTitle">Job Title *</Label>
+              <Label htmlFor="jobTitle">Título del Trabajo *</Label>
               <Input
                 id="jobTitle"
                 value={aboutMe.jobTitle}
                 onChange={(e) => handleInputChange("jobTitle", e.target.value)}
-                placeholder="Full Stack Developer"
+                placeholder="Desarrollador Full Stack"
                 className="transition-all duration-300 focus:shadow-lg"
               />
             </div>
@@ -192,13 +192,13 @@ export function AboutMeForm() {
           {/* Contact Information */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email">Correo Electrónico *</Label>
               <Input
                 id="email"
                 type="email"
                 value={aboutMe.email}
                 onChange={(e) => handleInputChange("email", e.target.value)}
-                placeholder="john@example.com"
+                placeholder="juan@ejemplo.com"
                 className="transition-all duration-300 focus:shadow-lg"
               />
             </div>
@@ -207,26 +207,26 @@ export function AboutMeForm() {
           {/* Social Links */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="githubLink">GitHub Link</Label>
+              <Label htmlFor="githubLink">Enlace de GitHub</Label>
               <Input
                 id="githubLink"
                 value={aboutMe.githubLink}
                 onChange={(e) =>
                   handleInputChange("githubLink", e.target.value)
                 }
-                placeholder="https://github.com/johndoe"
+                placeholder="https://github.com/usuario"
                 className="transition-all duration-300 focus:shadow-lg"
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="linkedinLink">LinkedIn Link</Label>
+              <Label htmlFor="linkedinLink">Enlace de LinkedIn</Label>
               <Input
                 id="linkedinLink"
                 value={aboutMe.linkedinLink}
                 onChange={(e) =>
                   handleInputChange("linkedinLink", e.target.value)
                 }
-                placeholder="https://linkedin.com/in/johndoe"
+                placeholder="https://linkedin.com/in/usuario"
                 className="transition-all duration-300 focus:shadow-lg"
               />
             </div>
@@ -234,12 +234,12 @@ export function AboutMeForm() {
 
           {/* About Me */}
           <div className="space-y-2">
-            <Label htmlFor="aboutMe">About Me *</Label>
+            <Label htmlFor="aboutMe">Sobre Mí *</Label>
             <Textarea
               id="aboutMe"
               value={aboutMe.aboutMe}
               onChange={(e) => handleInputChange("aboutMe", e.target.value)}
-              placeholder="Tell us about yourself, your passion, and your soft skills..."
+              placeholder="Cuéntanos sobre ti, tu pasión y tus habilidades blandas..."
               className="min-h-[120px] resize-none transition-all duration-300 focus:shadow-lg"
             />
           </div>
@@ -315,10 +315,10 @@ export function AboutMeForm() {
 
           {/* Tech Stack */}
           <div className="space-y-4">
-            <Label>Tech Stack</Label>
+            <Label>Stack Tecnológico</Label>
             <Select onValueChange={addTechStack}>
               <SelectTrigger className="transition-all duration-300 focus:shadow-lg">
-                <SelectValue placeholder="Select technologies to add..." />
+                <SelectValue placeholder="Selecciona tecnologías para agregar..." />
               </SelectTrigger>
               <SelectContent>
                 {techStackOptions

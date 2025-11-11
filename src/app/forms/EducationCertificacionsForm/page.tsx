@@ -31,9 +31,9 @@ export default function Page() {
 
 const certificateTypes = {
   diploma: "Diploma",
-  course: "Course",
+  course: "Curso",
   bootcamp: "Bootcamp",
-  other: "Other",
+  other: "Otro",
 } as const;
 
 export function EducationCertificationsForm() {
@@ -113,11 +113,11 @@ export function EducationCertificationsForm() {
       <Card className="form-card">
         <CardHeader>
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Education & Certifications
+            Educación y Certificaciones
           </CardTitle>
           <CardDescription>
-            Add your educational background, certifications, and professional
-            courses
+            Agrega tu formación académica, certificaciones y cursos
+            profesionales
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -128,7 +128,7 @@ export function EducationCertificationsForm() {
               className="btn-gradient w-full"
             >
               <Plus className="w-4 h-4 mr-2" />
-              Add Education/Certification
+              Agregar Educación/Certificación
             </Button>
           )}
 
@@ -138,7 +138,7 @@ export function EducationCertificationsForm() {
               <CardContent className="pt-6 space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="new-title">Title/Degree *</Label>
+                    <Label htmlFor="new-title">Título/Grado *</Label>
                     <Input
                       id="new-title"
                       value={newEducation.title}
@@ -149,12 +149,12 @@ export function EducationCertificationsForm() {
                         })
                       }
                       maxLength={50}
-                      placeholder="Bachelor of Computer Science"
+                      placeholder="Licenciatura en Informática"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="new-academy">Institution/Academy *</Label>
+                    <Label htmlFor="new-academy">Institución/Academia *</Label>
                     <Input
                       id="new-academy"
                       value={newEducation.academy}
@@ -165,7 +165,7 @@ export function EducationCertificationsForm() {
                         })
                       }
                       maxLength={50}
-                      placeholder="University of Technology"
+                      placeholder="Universidad de Tecnología"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
                   </div>
@@ -173,7 +173,7 @@ export function EducationCertificationsForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="new-cert-type">Certificate Type</Label>
+                    <Label htmlFor="new-cert-type">Tipo de Certificado</Label>
                     <Select
                       value={newEducation.certificateType}
                       onValueChange={(value: any) =>
@@ -198,7 +198,7 @@ export function EducationCertificationsForm() {
                     </Select>
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="new-edu-start-date">Start Date</Label>
+                    <Label htmlFor="new-edu-start-date">Fecha de Inicio</Label>
                     <Input
                       id="new-edu-start-date"
                       type="month"
@@ -213,7 +213,7 @@ export function EducationCertificationsForm() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="new-edu-end-date">End Date</Label>
+                    <Label htmlFor="new-edu-end-date">Fecha de Fin</Label>
                     <Input
                       id="new-edu-end-date"
                       type="month"
@@ -225,14 +225,14 @@ export function EducationCertificationsForm() {
                         })
                       }
                       min={newEducation.startDate} // <-- Solo permite fechas iguales o posteriores al startDate
-                      placeholder="Leave empty if ongoing"
+                      placeholder="Dejar vacío si está en curso"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="new-edu-description">Description</Label>
+                  <Label htmlFor="new-edu-description">Descripción</Label>
                   <Textarea
                     id="new-edu-description"
                     value={newEducation.description}
@@ -242,17 +242,17 @@ export function EducationCertificationsForm() {
                         description: e.target.value,
                       })
                     }
-                    placeholder="Describe what you learned, key subjects, achievements, or certifications obtained..."
+                    placeholder="Describe lo que aprendiste, materias clave, logros o certificaciones obtenidas..."
                     className="min-h-[100px] resize-none transition-all duration-300 focus:shadow-lg"
                   />
                 </div>
 
                 <div className="flex space-x-3">
                   <Button onClick={handleAddEducation} className="btn-gradient">
-                    Add Education
+                    Agregar Educación
                   </Button>
                   <Button variant="outline" onClick={() => setIsAdding(false)}>
-                    Cancel
+                    Cancelar
                   </Button>
                 </div>
               </CardContent>
@@ -264,7 +264,7 @@ export function EducationCertificationsForm() {
             <div className="space-y-4 mt-6">
               <Separator />
               <h3 className="text-lg font-semibold">
-                Your Education & Certifications
+                Tu Educación y Certificaciones
               </h3>
 
               {education.map((edu: Education) => (
@@ -276,16 +276,16 @@ export function EducationCertificationsForm() {
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center space-x-2 mb-2">
-                          <GraduationCap className="w-4 h-4 text-secondary" />
+                          <GraduationCap className="w-4 h-4 text-muted-foreground" />
                           {/* Mostrar título como texto estático (limitado al guardar en el formulario) */}
                           <div className="font-semibold text-lg p-0 h-auto bg-transparent break-words">
                             {edu.title}
                           </div>
                         </div>
                         <div className="flex items-center space-x-2 mb-2">
-                          <School className="w-4 h-4 text-secondary" />
+                          <School className="w-4 h-4 text-muted-foreground" />
                           {/* Mostrar institución como texto estático */}
-                          <div className="text-secondary font-medium p-0 h-auto bg-transparent break-words">
+                          <div className="text-muted-foreground font-medium p-0 h-auto bg-transparent break-words">
                             {edu.academy}
                           </div>
                         </div>
@@ -293,7 +293,7 @@ export function EducationCertificationsForm() {
                           <div className="flex items-center space-x-2 min-w-0">
                             <Calendar className="w-3 h-3 text-muted-foreground" />
                             <div className="text-sm text-muted-foreground p-0 h-auto bg-transparent truncate">
-                              {edu.startDate} - {edu.endDate || "Present"}
+                              {edu.startDate} - {edu.endDate || "Presente"}
                             </div>
                           </div>
                           <Badge
@@ -330,7 +330,7 @@ export function EducationCertificationsForm() {
                     </div>
 
                     {/* Descripción como texto estático (no editable) */}
-                     {edu.description ? (
+                    {edu.description ? (
                       <div className="text-muted-foreground text-sm leading-relaxed break-words max-h-20 overflow-auto whitespace-pre-wrap">
                         {edu.description}
                       </div>

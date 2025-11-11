@@ -3,11 +3,64 @@
 import { PortfolioState } from "@/contexts/PortfolioContext";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { PortfolioState } from "@/contexts/PortfolioContext";
+import { z } from "zod";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+// Client-side validation schema
+const portfolioDataSchema = z.object({
+  aboutMe: z.object({
+    fullName: z.string().min(1, "Full name is required"),
+    jobTitle: z.string().min(1, "Job title is required"),
+    githubLink: z.string().optional(),
+    linkedinLink: z.string().optional(),
+    email: z.string().email("Valid email is required"),
+    aboutMe: z.string().min(1, "About me description is required"),
+    techStack: z.array(z.string()).min(1, "At least one tech skill is required"),
+    features: z.array(
+      z.object({
+        title: z.string().min(1, "Feature title is required"),
+        description: z.string().min(1, "Feature description is required"),
+      })
+    ),
+  }),
+  workExperience: z.array(
+    z.object({
+      id: z.string(),
+      specialty: z.string().min(1),
+      company: z.string().min(1),
+      location: z.string().min(1),
+      description: z.string(),
+      startDate: z.string().min(1),
+      endDate: z.string().min(1),
+    })
+  ),
+  education: z.array(
+    z.object({
+      id: z.string(),
+      title: z.string().min(1),
+      academy: z.string().min(1),
+      startDate: z.string().min(1),
+      endDate: z.string().min(1),
+      certificateType: z.enum(['diploma', 'course', 'bootcamp', 'other']),
+      description: z.string(),
+    })
+  ),
+  projects: z.array(
+    z.object({
+      id: z.string(),
+      projectName: z.string().min(1),
+      description: z.string().min(1),
+      technologiesUsed: z.array(z.string()).min(1),
+      githubLink: z.string().optional(),
+      liveDemoLink: z.string().optional(),
+      imageCount: z.number(),
+    })
+  ),
+  currentSection: z.enum(['about', 'work', 'education', 'projects']),
+});
 
 export const scrollToSection = (href: string) => {
   if (href === "#") {
@@ -21,51 +74,54 @@ export const downloadPortfolio = async (data: PortfolioState) => {
   try {
     const formData = new FormData();
 
-    // Add hero data
-    formData.append('hero.firstName', data.hero.firstName);
-    formData.append('hero.lastName', data.hero.lastName);
-    formData.append('hero.headline', data.hero.headline);
+    // Send structured data as a single JSON string
+    const portfolioData = {
+      aboutMe: {
+        fullName: data.aboutMe.fullName,
+        jobTitle: data.aboutMe.jobTitle,
+        githubLink: data.aboutMe.githubLink || '',
+        linkedinLink: data.aboutMe.linkedinLink || '',
+        email: data.aboutMe.email,
+        aboutMe: data.aboutMe.aboutMe,
+        techStack: data.aboutMe.techStack,
+        features: data.aboutMe.features,
+      },
+      workExperience: data.workExperience,
+      education: data.education,
+      projects: data.projects.map(p => ({
+        id: p.id,
+        projectName: p.projectName,
+        description: p.description,
+        technologiesUsed: p.technologiesUsed,
+        githubLink: p.githubLink || '',
+        liveDemoLink: p.liveDemoLink || '',
+        imageCount: p.projectImages.length,
+      })),
+      currentSection: data.currentSection,
+    };
 
-    // Add about me data
-    formData.append('aboutMe.fullName', data.aboutMe.fullName);
-    formData.append('aboutMe.jobTitle', data.aboutMe.jobTitle);
-    formData.append('aboutMe.githubLink', data.aboutMe.githubLink);
-    formData.append('aboutMe.linkedinLink', data.aboutMe.linkedinLink);
-    formData.append('aboutMe.email', data.aboutMe.email);
-    formData.append('aboutMe.aboutMe', data.aboutMe.aboutMe);
-    formData.append('aboutMe.techStack', JSON.stringify(data.aboutMe.techStack));
-    formData.append('aboutMe.features', JSON.stringify(data.aboutMe.features));
-
-    // Add profile photo
-    if (data.aboutMe.profilePhoto) {
-      formData.append('aboutMe.profilePhoto', data.aboutMe.profilePhoto);
+    // Validate data before sending
+    const validationResult = portfolioDataSchema.safeParse(portfolioData);
+    if (!validationResult.success) {
+      console.error('Client validation failed:', validationResult.error.issues);
+      throw new Error('Please fill in all required fields before downloading');
     }
 
-    // Add work experience
-    formData.append('workExperience', JSON.stringify(data.workExperience));
+    // Add the JSON data
+    formData.append('portfolioData', JSON.stringify(portfolioData));
 
-    // Add education
-    formData.append('education', JSON.stringify(data.education));
+    // Add profile photo if exists
+    if (data.aboutMe.profilePhoto) {
+      formData.append('profilePhoto', data.aboutMe.profilePhoto);
+    }
 
-    // Add projects (without images first)
-    const projectsWithoutImages = data.projects.map(project => ({
-      id: project.id,
-      projectName: project.projectName,
-      description: project.description,
-      technologiesUsed: project.technologiesUsed,
-      githubLink: project.githubLink,
-      liveDemoLink: project.liveDemoLink,
-    }));
-    formData.append('projects', JSON.stringify(projectsWithoutImages));
-
-    // Add project images
+    // Add project images with clear naming
     data.projects.forEach((project) => {
       project.projectImages.forEach((image, index) => {
-        formData.append(`project.${project.id}.image.${index}`, image);
+        formData.append(`projectImage_${project.id}_${index}`, image);
       });
     });
 
-    // Call API route to generate zip
     const response = await fetch('/api/download-portfolio', {
       method: 'POST',
       body: formData,
@@ -73,13 +129,12 @@ export const downloadPortfolio = async (data: PortfolioState) => {
 
     if (!response.ok) {
       const errorData = await response.json();
+      console.error('Error generating portfolio:', errorData);
       throw new Error(errorData.error || 'Failed to generate portfolio');
     }
 
-    // Get the zip file as blob
     const blob = await response.blob();
 
-    // Trigger download
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;

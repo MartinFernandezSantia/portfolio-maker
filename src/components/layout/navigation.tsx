@@ -22,13 +22,13 @@ export const Navigation = () => {
   }, []);
 
   const navItems: NavItem[] = [
-    { name: "Home", href: "#" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Experience", href: "#experience" },
-    { name: "Education", href: "#education" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
+    { name: "Inicio", href: "#" },
+    { name: "Sobre Mí", href: "#about" },
+    { name: "Habilidades", href: "#skills" },
+    { name: "Experiencia", href: "#experience" },
+    { name: "Educación", href: "#education" },
+    { name: "Proyectos", href: "#projects" },
+    { name: "Contacto", href: "#contact" },
   ];
 
   const closeMobileMenu = () => {
@@ -41,8 +41,8 @@ export const Navigation = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-smooth ${isScrolled
-          ? "bg-background/90 backdrop-blur-md border-b border-border"
-          : "bg-transparent"
+        ? "bg-background/90 backdrop-blur-md border-b border-border"
+        : "bg-transparent"
         }`}
     >
       <div className="container mx-auto px-6">

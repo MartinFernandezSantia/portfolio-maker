@@ -42,7 +42,7 @@ function PreviewButton({ className = "" }: { className?: string }) {
       onClick={() => router.push("/preview")}
     >
       <Eye className="w-4 h-4 mr-2" />
-      Preview
+      Vista Previa
     </Button>
   );
 }
@@ -51,27 +51,27 @@ function PreviewButton({ className = "" }: { className?: string }) {
 const navigationItems = [
   {
     id: "about" as const,
-    title: "About Me",
+    title: "Sobre Mí",
     icon: User,
-    description: "Personal information and skills",
+    description: "Información personal y habilidades",
   },
   {
     id: "work" as const,
-    title: "Work Experience",
+    title: "Experiencia Laboral",
     icon: Briefcase,
-    description: "Professional experience",
+    description: "Experiencia profesional",
   },
   {
     id: "education" as const,
-    title: "Education & Certifications",
+    title: "Educación y Certificaciones",
     icon: GraduationCap,
-    description: "Educational background",
+    description: "Formación académica",
   },
   {
     id: "projects" as const,
-    title: "Featured Projects",
+    title: "Proyectos Destacados",
     icon: FolderOpen,
-    description: "Showcase your work",
+    description: "Muestra tu trabajo",
   },
 ];
 
@@ -105,7 +105,7 @@ function PortfolioSidebar({
               <div>
                 <h2 className="font-bold text-lg">Portfolio Maker</h2>
                 <p className="text-sm text-muted-foreground">
-                  Create your portfolio
+                  Crea tu portafolio
                 </p>
               </div>
             </div>
@@ -164,7 +164,7 @@ function PortfolioSidebar({
                   onClick={async () => await downloadPortfolio(state)}
                 >
                   <Download className="w-4 h-4 mr-2" />
-                  Generate Portfolio
+                  Generar Portafolio
                 </Button>
               </div>
             </div>
@@ -201,7 +201,7 @@ function MobileSidebar() {
             <div>
               <h2 className="font-bold text-lg">Portfolio Maker</h2>
               <p className="text-sm text-muted-foreground">
-                Create your portfolio
+                Crea tu portafolio
               </p>
             </div>
           </div>
@@ -276,7 +276,7 @@ function MainContent() {
     const section = navigationItems.find(
       (item) => item.id === state.currentSection,
     );
-    return section?.title || "About Me";
+    return section?.title || "Sobre Mí";
   };
 
   return (
@@ -291,7 +291,7 @@ function MainContent() {
                 {getCurrentSectionTitle()}
               </h1>
               <p className="text-sm text-muted-foreground">
-                Build your professional portfolio step by step
+                Construye tu portafolio profesional paso a paso
               </p>
             </div>
           </div>
@@ -305,7 +305,7 @@ function MainContent() {
               onClick={async () => await downloadPortfolio(state)}
             >
               <Download className="w-4 h-4 mr-2" />
-              Generate Portfolio
+              Generar Portafolio
             </Button>
           </div>
         </div>
@@ -321,11 +321,11 @@ function MainContent() {
         <div className="flex space-x-3">
           <Button variant="outline" className="flex-1" size="sm">
             <Eye className="w-4 h-4 mr-2" />
-            Preview
+            Vista Previa
           </Button>
           <Button className="btn-gradient flex-1" size="sm" onClick={async () => await downloadPortfolio(state)}>
             <Download className="w-4 h-4 mr-2" />
-            Generate
+            Generar
           </Button>
         </div>
       </div>

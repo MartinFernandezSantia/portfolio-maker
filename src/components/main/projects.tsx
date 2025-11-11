@@ -11,8 +11,8 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 relative">
       <div className="container mx-auto">
-        <H2 subtitle="Here are some of my recent projects that showcase my skills and passion for creating innovative web solutions.">
-          Featured <span className="gradient-text">Projects</span>
+        <H2 subtitle="Aquí hay algunos de mis proyectos recientes que muestran mis habilidades y pasión por crear soluciones web innovadoras.">
+          Proyectos <span className="gradient-text">Destacados</span>
         </H2>
 
         {projects.length > 0 ? (
@@ -30,7 +30,7 @@ const Projects = () => {
           />
         ) : (
           <p className="text-center text-muted-foreground mt-6">
-            No featured projects yet. Add some in the dashboard.
+            Aún no hay proyectos destacados. Agrega algunos en el panel de control.
           </p>
         )}
       </div>

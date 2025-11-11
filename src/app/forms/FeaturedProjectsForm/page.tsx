@@ -38,53 +38,53 @@ export default function Page() {
 }
 
 const techOptions = [
-  "React",
-  "Next.js",
-  "Vue.js",
-  "Angular",
-  "TypeScript",
-  "JavaScript",
-  "Node.js",
-  "Express",
-  "Python",
-  "Django",
-  "Flask",
-  "Java",
-  "Spring",
-  "C#",
   ".NET",
-  "PHP",
-  "Laravel",
-  "Ruby",
-  "Rails",
-  "Go",
-  "Rust",
-  "MongoDB",
-  "PostgreSQL",
-  "MySQL",
-  "Redis",
-  "Docker",
-  "Kubernetes",
+  "Angular",
   "AWS",
   "Azure",
+  "Bootstrap",
+  "C#",
+  "Cypress",
+  "Django",
+  "Docker",
+  "Express",
+  "Flask",
+  "Flutter",
   "GCP",
   "Git",
+  "Go",
   "GraphQL",
-  "REST API",
-  "TailwindCSS",
-  "Material-UI",
-  "Bootstrap",
-  "Sass",
-  "Webpack",
-  "Vite",
+  "Java",
+  "JavaScript",
   "Jest",
-  "Cypress",
-  "React Native",
-  "Flutter",
-  "Swift",
   "Kotlin",
+  "Kubernetes",
+  "Laravel",
+  "Material-UI",
+  "MongoDB",
+  "MySQL",
+  "Next.js",
+  "Node.js",
+  "PHP",
+  "PostgreSQL",
+  "Python",
+  "Rails",
+  "React",
+  "React Native",
+  "Redis",
+  "REST API",
+  "Ruby",
+  "Rust",
+  "Sass",
+  "Spring",
+  "Swift",
+  "TailwindCSS",
+  "TypeScript",
   "Unity",
   "Unreal Engine",
+  "Vite",
+  "Vue.js",
+  "Webpack",
 ];
 
 export function FeaturedProjectsForm() {
@@ -216,11 +216,11 @@ export function FeaturedProjectsForm() {
       <Card className="form-card">
         <CardHeader>
           <CardTitle className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-            Featured Projects
+            Proyectos Destacados
           </CardTitle>
           <CardDescription>
-            Showcase your best projects with images, descriptions, and
-            technologies used
+            Muestra tus mejores proyectos con imágenes, descripciones y
+            tecnologías utilizadas
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -231,7 +231,7 @@ export function FeaturedProjectsForm() {
               className="btn-gradient w-full"
             >
               <Plus className="w-4 h-4 mr-2" />
-              Add Featured Project
+              Agregar Proyecto Destacado
             </Button>
           )}
 
@@ -240,7 +240,7 @@ export function FeaturedProjectsForm() {
             <Card className="border-dashed border-2 border-primary/30">
               <CardContent className="pt-6 space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="new-project-name">Project Name *</Label>
+                  <Label htmlFor="new-project-name">Nombre del Proyecto *</Label>
                   <Input
                     id="new-project-name"
                     value={newProject.projectName}
@@ -250,14 +250,14 @@ export function FeaturedProjectsForm() {
                         projectName: e.target.value,
                       })
                     }
-                    placeholder="Awesome Project"
+                    placeholder="Proyecto Increíble"
                     className="transition-all duration-300 focus:shadow-lg"
                   />
                 </div>
 
                 {/* Project Images */}
                 <div className="space-y-3">
-                  <Label>Project Images</Label>
+                  <Label>Imágenes del Proyecto</Label>
                   <div className="flex items-center space-x-4">
                     <Button
                       type="button"
@@ -266,7 +266,7 @@ export function FeaturedProjectsForm() {
                       className="flex items-center space-x-2"
                     >
                       <Upload className="w-4 h-4" />
-                      <span>Upload Image</span>
+                      <span>Subir Imagen</span>
                     </Button>
                     <input
                       ref={fileInputRef}
@@ -297,7 +297,7 @@ export function FeaturedProjectsForm() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="new-project-description">Description *</Label>
+                  <Label htmlFor="new-project-description">Descripción *</Label>
                   <Textarea
                     id="new-project-description"
                     value={newProject.description}
@@ -307,21 +307,21 @@ export function FeaturedProjectsForm() {
                         description: e.target.value,
                       })
                     }
-                    placeholder="Describe your project, its purpose, key features, and what makes it special..."
+                    placeholder="Describe tu proyecto, su propósito, características clave y qué lo hace especial..."
                     className="min-h-[100px] resize-none transition-all duration-300 focus:shadow-lg"
                   />
                 </div>
 
                 {/* Technologies Used */}
                 <div className="space-y-3">
-                  <Label>Technologies Used</Label>
+                  <Label>Tecnologías Utilizadas</Label>
                   <Select
                     onValueChange={(value: string) =>
                       addTechnology(value, true)
                     }
                   >
                     <SelectTrigger className="transition-all duration-300 focus:shadow-lg">
-                      <SelectValue placeholder="Select technologies used..." />
+                      <SelectValue placeholder="Selecciona las tecnologías utilizadas..." />
                     </SelectTrigger>
                     <SelectContent>
                       {techOptions
@@ -361,7 +361,7 @@ export function FeaturedProjectsForm() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
-                    <Label htmlFor="new-github-link">GitHub Link</Label>
+                    <Label htmlFor="new-github-link">Enlace de GitHub</Label>
                     <Input
                       id="new-github-link"
                       value={newProject.githubLink}
@@ -371,12 +371,12 @@ export function FeaturedProjectsForm() {
                           githubLink: e.target.value,
                         })
                       }
-                      placeholder="https://github.com/username/project"
+                      placeholder="https://github.com/usuario/proyecto"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="new-live-demo-link">Live Demo Link</Label>
+                    <Label htmlFor="new-live-demo-link">Enlace de Demo en Vivo</Label>
                     <Input
                       id="new-live-demo-link"
                       value={newProject.liveDemoLink}
@@ -386,7 +386,7 @@ export function FeaturedProjectsForm() {
                           liveDemoLink: e.target.value,
                         })
                       }
-                      placeholder="https://your-project.com"
+                      placeholder="https://tu-proyecto.com"
                       className="transition-all duration-300 focus:shadow-lg"
                     />
                   </div>
@@ -394,10 +394,10 @@ export function FeaturedProjectsForm() {
 
                 <div className="flex space-x-3">
                   <Button onClick={handleAddProject} className="btn-gradient">
-                    Add Project
+                    Agregar Proyecto
                   </Button>
                   <Button variant="outline" onClick={() => setIsAdding(false)}>
-                    Cancel
+                    Cancelar
                   </Button>
                 </div>
               </CardContent>
@@ -408,7 +408,7 @@ export function FeaturedProjectsForm() {
           {projects.length > 0 && (
             <div className="space-y-4 mt-6">
               <Separator />
-              <h3 className="text-lg font-semibold">Your Featured Projects</h3>
+              <h3 className="text-lg font-semibold">Tus Proyectos Destacados</h3>
 
               {projects.map((project: Project) => (
                 <Card

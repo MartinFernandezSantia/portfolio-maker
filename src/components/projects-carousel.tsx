@@ -79,7 +79,7 @@ export default function ProjectsCarousel({ projects }: ProjectsCarouselProps) {
             </CarouselItem>
           ))}
         </CarouselContent>
-        {totalProjects > 3 && (
+        {totalProjects > 2 && (
           <>
             <CarouselPrevious className="hidden lg:flex" />
             <CarouselNext className="hidden lg:flex" />

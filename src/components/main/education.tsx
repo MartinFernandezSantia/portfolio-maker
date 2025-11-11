@@ -41,7 +41,7 @@ const Education = () => {
     .map((edu) => ({
       name: edu.title,
       issuer: edu.academy,
-      period: `${edu.startDate} - ${edu.endDate || "Present"}`,
+      period: `${edu.startDate} - ${edu.endDate || "Presente"}`,
       type: edu.certificateType,
       description: edu.description,
     }));
@@ -49,8 +49,8 @@ const Education = () => {
   return (
     <section id="education" className="py-20 relative">
       <div className="container mx-auto">
-        <H2 subtitle="Continuous learning and professional development">
-          Education & <span className="gradient-text">Certifications</span>
+        <H2 subtitle="Aprendizaje continuo y desarrollo profesional">
+          Educación y <span className="gradient-text">Certificaciones</span>
         </H2>
 
         <div className={cn(" max-w-6xl mx-auto", {

@@ -19,15 +19,15 @@ const Hero = () => {
           <Avatar />
 
           <H1>
-            Hi, I&apos;m{" "}
+            Hola, soy{" "}
             <span className="gradient-text">
               {aboutMe.fullName}
             </span>
           </H1>
 
           <Subtitle className="text-lg 2xl:text-xl">
-            {aboutMe.jobTitle} crafting beautiful, functional experiences
-            with modern technologies and clean code.
+            {aboutMe.jobTitle} creando experiencias hermosas y funcionales
+            con tecnologías modernas y código limpio.
           </Subtitle>
 
           <CTA />

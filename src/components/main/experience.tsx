@@ -29,14 +29,14 @@ const Experience = () => {
     title: exp.specialty,
     company: exp.company,
     location: exp.location,
-    period: `${exp.startDate ? formatDate(exp.startDate) : ""} - ${exp.endDate ? formatDate(exp.endDate) : "Present"}`,
+    period: `${exp.startDate ? formatDate(exp.startDate) : ""} - ${exp.endDate ? formatDate(exp.endDate) : "Presente"}`,
     description: exp.description,
   }));
 
   return (
     <section id="experience" className="py-20 relative">
-      <H2 subtitle="My professional journey building impactful digital solutions">
-        Work <span className="gradient-text">Experience</span>
+      <H2 subtitle="Mi trayectoria profesional construyendo soluciones digitales impactantes">
+        Experiencia <span className="gradient-text">Laboral</span>
       </H2>
 
       <ExperienceTimeline experiences={experiences} />
